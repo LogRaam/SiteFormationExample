@@ -53,6 +53,45 @@
         <div class="card"><div class="card-icone">🛑</div><h3>Pouvoir tout couper</h3><p class="muted">Kill switch pour une intégration sensible ou coûteuse.</p></div>
       </div>
 
+      <h2>Trois bénéfices clés, en détail</h2>
+      <p class="lede">Approfondissement des trois bénéfices mis en avant sur la page d'accueil, avec exemples et garde-fous.</p>
+
+      <section class="card" id="deployer-vs-exposer" style="scroll-margin-top:84px;margin-bottom:1.25rem">
+        <div class="card-icone">⏱️</div>
+        <h3 class="mt-0">Déployer ≠ Exposer</h3>
+        <p>Mettre du code en production et le rendre visible aux membres deviennent <strong>deux décisions séparées</strong>. Le code est livré « éteint » derrière un flag, puis on choisit <em>qui</em>, <em>quand</em> et <em>combien</em> y ont accès — sans nouveau déploiement.</p>
+        <p><strong>Exemple ExampleCo :</strong> la nouvelle page de virements est fusionnée et déployée le mardi, flag « off ». Le métier décide de l'activer le lundi suivant, après une campagne de communication — d'abord pour les employés internes, puis le grand public. Aucune mise en production n'est nécessaire pour l'activation.</p>
+        <div class="grid grid-2">
+          <div><strong>✔ À faire</strong><ul class="coches"><li>Livrer tôt, en continu, derrière un flag « off ».</li><li>Garder une valeur par défaut sûre (comportement existant).</li></ul></div>
+          <div><strong>✘ À éviter</strong><ul class="croix"><li>Attendre que « tout soit prêt » pour fusionner (grosses branches).</li><li>Activer sans propriétaire de la décision d'exposition.</li></ul></div>
+        </div>
+        <p class="mb-0">📎 Voir aussi&nbsp;: <a href="concepts.html">Concepts</a> · <a href="operationnaliser.html">Mise en œuvre</a></p>
+      </section>
+
+      <section class="card" id="reduire-le-risque" style="scroll-margin-top:84px;margin-bottom:1.25rem">
+        <div class="card-icone">🛟</div>
+        <h3 class="mt-0">Réduire le risque</h3>
+        <p>On limite le <strong>rayon d'impact</strong> d'un changement&nbsp;: déploiement progressif par paliers (1 % → 10 % → 50 % → 100 %) avec surveillance, et <strong>kill switch</strong> pour couper instantanément en cas d'incident — sans mise en production d'urgence.</p>
+        <p><strong>Exemple ExampleCo :</strong> une fonctionnalité est activée à 10 % ; le taux d'erreur grimpe. Le PO déclenche le kill switch&nbsp;: la fonctionnalité est coupée en quelques secondes, le temps d'investiguer. Aucun rollback de déploiement, aucune fenêtre de MEP.</p>
+        <div class="grid grid-2">
+          <div><strong>✔ À faire</strong><ul class="coches"><li>Augmenter l'exposition par paliers en surveillant les indicateurs.</li><li>Garder le kill switch à portée et tester les deux états.</li></ul></div>
+          <div><strong>✘ À éviter</strong><ul class="croix"><li>Activer à 100 % d'emblée, sans surveillance.</li><li>Compter sur le flag pour compenser des tests absents.</li></ul></div>
+        </div>
+        <p class="mb-0">🧪 À essayer&nbsp;: <a href="sandbox.html">le bac à sable</a> (rollout progressif + kill switch) · 📎 <a href="cycle-de-vie.html">Cycle de vie</a></p>
+      </section>
+
+      <section class="card" id="cibler-finement" style="scroll-margin-top:84px;margin-bottom:1.25rem">
+        <div class="card-icone">🎯</div>
+        <h3 class="mt-0">Cibler finement</h3>
+        <p>On expose une fonctionnalité à un <strong>segment précis</strong> (bêta-testeurs, employés internes, région, type de membre) avant la généralisation. Cela permet de valider en conditions réelles, sur un public maîtrisé.</p>
+        <p><strong>Exemple ExampleCo :</strong> une refonte est d'abord activée pour les employés internes (dogfooding), puis pour un groupe de bêta-testeurs volontaires, avant l'ouverture progressive à l'ensemble des membres.</p>
+        <div class="grid grid-2">
+          <div><strong>✔ À faire</strong><ul class="coches"><li>Commencer par l'interne, puis un segment bêta.</li><li>Utiliser une clé de contexte stable (bucketing reproductible).</li></ul></div>
+          <div><strong>✘ À éviter</strong><ul class="croix"><li>Confondre ciblage de toggle et contrôle d'accès sécurisé.</li><li>Multiplier les règles de ciblage au point de ne plus s'y retrouver.</li></ul></div>
+        </div>
+        <p class="mb-0">📎 Voir aussi&nbsp;: <a href="exampleco.html#types">Types de switches</a> · <a href="glossaire.html">Glossaire (segment, bucketing)</a></p>
+      </section>
+
       <h2>Les mauvaises raisons (signaux d'alerte)</h2>
       <ul class="croix">
         <li>« On met un flag au cas où » — sans propriétaire ni date de retrait&nbsp;: futur déchet.</li>
