@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mise en œuvre — Code & création dans LaunchDarkly · Formation ExampleCo</title>
+  <meta name="description" content="Opérationnaliser un feature toggle : intégrer le SDK, évaluer un flag, créer le flag dans LaunchDarkly, cibler des utilisateurs.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="operationnaliser">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Mise en œuvre</nav>
+      <span class="tag dev">Référence · Technique</span>
+      <h1>Opérationnaliser un toggle avec le code et LaunchDarkly</h1>
+      <p class="lede">De la création du flag dans la console LaunchDarkly à son évaluation dans le code, voici le parcours technique complet. Les exemples ci-dessous sont génériques et illustratifs.</p>
+
+      <div class="callout">
+        <strong>Vue d'ensemble :</strong> le <strong>SDK</strong> dans votre application interroge LaunchDarkly pour connaître la valeur d'un flag <em>pour un contexte donné</em> (un membre, un appareil…). Le SDK met les règles en cache et reçoit les changements en quasi temps réel. Vous fournissez toujours une <strong>valeur par défaut</strong> au cas où le service serait injoignable.
+      </div>
+
+      <h2>1. Créer le flag dans LaunchDarkly</h2>
+      <ol class="etapes">
+        <li><h3>Définir la clé du flag</h3><p>Une clé stable, en kebab-case, descriptive et préfixée par l'équipe/domaine&nbsp;: <code>virements-nouvelle-page</code>. La clé ne doit plus changer.</p></li>
+        <li><h3>Choisir le type de variation</h3><p>Booléen (on/off) pour un release simple, ou multivarié (chaîne, nombre, JSON) pour des variantes.</p></li>
+        <li><h3>Renseigner le contexte de gouvernance</h3><p>Propriétaire, description, type de switch, date de retrait visée, et catégorie au catalogue (voir <a href="exampleco.html">Chez ExampleCo</a>).</p></li>
+        <li><h3>Définir la valeur par défaut côté serveur</h3><p>Par défaut « off » (comportement existant) tant que la nouvelle fonctionnalité n'est pas prête.</p></li>
+        <li><h3>Configurer les règles de ciblage</h3><p>Cibler des membres, des segments (bêta, interne) ou un pourcentage progressif.</p></li>
+      </ol>
+
+      <div class="placeholder">
+        <strong>Note :</strong> Cette section doit être complétée avec les captures d'écran réelles de la console LaunchDarkly utilisée chez ExampleCo, les conventions de nommage internes et le gabarit de fiche de toggle du catalogue central.
+      </div>
+
+      <h2>2. Évaluer le flag dans le code</h2>
+      <p>Selon votre stack&nbsp;:</p>
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="actif" data-tab="js">JavaScript / Node</button>
+          <button data-tab="java">Java</button>
+          <button data-tab="csharp">C#</button>
+          <button data-tab="python">Python</button>
+        </div>
+        <div class="tab-panel actif" data-panel="js">
+<pre><code>import * as LaunchDarkly from '@launchdarkly/node-server-sdk';
+
+const client = LaunchDarkly.init(process.env.LD_SDK_KEY);
+await client.waitForInitialization();
+
+const contexte = { kind: 'user', key: membre.id, custom: { segment: 'beta' } };
+
+// 3e argument = valeur par défaut SÛRE si LD est injoignable
+const actif = await client.variation('virements-nouvelle-page', contexte, false);
+
+if (actif) {
+  afficherNouvellePage();
+} else {
+  afficherAnciennePage();
+}</code></pre>
+        </div>
+        <div class="tab-panel" data-panel="java">
+<pre><code>LDConfig config = new LDConfig.Builder().build();
+LDClient client = new LDClient(System.getenv("LD_SDK_KEY"), config);
+
+LDContext contexte = LDContext.builder(membre.getId())
+        .set("segment", "beta")
+        .build();
+
+boolean actif = client.boolVariation("virements-nouvelle-page", contexte, false);
+
+if (actif) {
+    afficherNouvellePage();
+} else {
+    afficherAnciennePage();
+}</code></pre>
+        </div>
+        <div class="tab-panel" data-panel="csharp">
+<pre><code>var config = Configuration.Default(Environment.GetEnvironmentVariable("LD_SDK_KEY"));
+var client = new LdClient(config);
+
+var contexte = Context.Builder(membre.Id)
+    .Set("segment", "beta")
+    .Build();
+
+bool actif = client.BoolVariation("virements-nouvelle-page", contexte, false);
+
+if (actif) AfficherNouvellePage();
+else       AfficherAnciennePage();</code></pre>
+        </div>
+        <div class="tab-panel" data-panel="python">
+<pre><code>import ldclient
+from ldclient.config import Config
+from ldclient.context import Context
+
+ldclient.set_config(Config(os.environ["LD_SDK_KEY"]))
+client = ldclient.get()
+
+contexte = Context.builder(membre.id).set("segment", "beta").build()
+
+actif = client.variation("virements-nouvelle-page", contexte, False)
+
+if actif:
+    afficher_nouvelle_page()
+else:
+    afficher_ancienne_page()</code></pre>
+        </div>
+      </div>
+
+      <h2>3. Patrons recommandés</h2>
+      <div class="grid grid-2">
+        <div class="card"><h3>✅ Centraliser l'évaluation</h3><p class="muted">Encapsulez l'appel au SDK derrière une petite fonction/abstraction. Le reste du code ne dépend pas directement de LaunchDarkly et reste testable.</p></div>
+        <div class="card"><h3>✅ Valeur par défaut = état sûr</h3><p class="muted">La valeur par défaut doit toujours correspondre au comportement <em>existant</em> et stable.</p></div>
+        <div class="card"><h3>✅ Contexte cohérent</h3><p class="muted">Utilisez une clé de contexte stable (id de membre) pour un bucketing reproductible lors d'un rollout progressif.</p></div>
+        <div class="card"><h3>✅ Tester les deux états</h3><p class="muted">Vos tests automatisés doivent couvrir <code>on</code> ET <code>off</code> — voir <a href="toggle-ready.html">Toggle Ready</a>.</p></div>
+      </div>
+
+      <div class="callout attention">
+        <strong>À éviter :</strong> appeler le SDK profondément dans des boucles critiques sans mise en cache, coder en dur la clé du flag à plusieurs endroits, ou laisser une branche du <code>if</code> non testée.
+      </div>
+
+      <h2>4. Du commit à l'activation (chez ExampleCo)</h2>
+      <div class="flux">
+        <div class="noeud"><span class="ic">💻</span>Code avec gating mergé</div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">🚀</span>Déploiement (flag « off »)</div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">🔀</span>Modif. de flag = <strong>PR auto (SOC2)</strong></div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">✔</span>Approbation par un pair</div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">🟢</span>Activation / rollout</div>
+      </div>
+      <p class="muted">Le détail du processus SOC2 et des types de switches est décrit dans <a href="exampleco.html">Chez ExampleCo</a>.</p>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="cycle-de-vie.html">Suivant : Cycle de vie →</a>
+        <a class="btn btn-fantome" href="sandbox.html">Essayer le bac à sable</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>

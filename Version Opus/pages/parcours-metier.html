@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parcours Métier / PO — Formation Feature Flags · ExampleCo</title>
+  <meta name="description" content="Parcours de formation interactif pour le métier et les Product Owners : activer, désactiver et piloter un toggle en toute sécurité.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="parcours-metier">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Formation › Métier / PO</nav>
+      <span class="tag metier">Parcours · Pilotage</span>
+      <h1>Parcours Métier / Product Owners</h1>
+      <p class="lede">Activer, désactiver et piloter un feature toggle en toute sécurité — sans écrire de code. Vous portez la <strong>décision d'affaires</strong>&nbsp;; l'équipe technique porte la mise en œuvre.</p>
+
+      <div class="parcours-tete">
+        <div style="flex:1;min-width:200px">
+          <strong id="p-pct">0 %</strong> complété
+          <div class="barre" style="margin:.5rem 0 0"><span id="p-barre"></span></div>
+        </div>
+        <span class="quiz-progress" id="p-compte">0 / 5 modules</span>
+        <button class="btn btn-fantome" id="p-reset">↻ Réinitialiser</button>
+      </div>
+
+      <ul class="module-liste" id="modules">
+        <li class="module" data-mod="m1">
+          <div class="module-tete">
+            <span class="num"><span>1</span></span>
+            <span class="module-titre"><strong>Votre rôle : décider de l'exposition</strong><small>Cadrage · 5 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>En tant que PO, vous décidez <strong>quand</strong> et <strong>pour qui</strong> une fonctionnalité est exposée, en fonction de la valeur d'affaires et du risque. Le code, lui, est déjà en production.</p>
+            <ul class="coches"><li>Vous ne déployez pas&nbsp;: vous <em>exposez</em>.</li><li>Vous définissez les critères de succès et de retour arrière.</li></ul>
+          </div>
+        </li>
+
+        <li class="module" data-mod="m2">
+          <div class="module-tete">
+            <span class="num"><span>2</span></span>
+            <span class="module-titre"><strong>Comprendre le déploiement progressif</strong><small>Concept · 8 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>Plutôt que d'activer pour tout le monde d'un coup, on augmente l'exposition par paliers en surveillant les indicateurs.</p>
+            <div class="pill-row"><span class="tag">Interne</span><span class="tag">Bêta</span><span class="tag">1 %</span><span class="tag">10 %</span><span class="tag">50 %</span><span class="tag">100 %</span></div>
+            <p class="mt-1">🧪 Essayez vous-même dans le <a href="sandbox.html">bac à sable interactif</a>&nbsp;: montez le palier et observez l'exposition.</p>
+          </div>
+        </li>
+
+        <li class="module" data-mod="m3">
+          <div class="module-tete">
+            <span class="num"><span>3</span></span>
+            <span class="module-titre"><strong>Le processus SOC2 (PR &amp; approbation)</strong><small>Conformité · 7 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>Chaque changement de flag crée une PR à faire approuver par une autre personne. Anticipez ce délai dans votre planification d'activation.</p>
+            <div class="flux">
+              <div class="noeud"><span class="ic">✏️</span>Vous demandez un changement</div>
+              <div class="fleche">→</div>
+              <div class="noeud"><span class="ic">🔀</span>PR auto</div>
+              <div class="fleche">→</div>
+              <div class="noeud"><span class="ic">✅</span>Un pair approuve</div>
+              <div class="fleche">→</div>
+              <div class="noeud"><span class="ic">🟢</span>Effectif</div>
+            </div>
+            <p>📎 Détails&nbsp;: <a href="exampleco.html#soc2">Chez ExampleCo · SOC2</a>.</p>
+          </div>
+        </li>
+
+        <li class="module" data-mod="m4">
+          <div class="module-tete">
+            <span class="num"><span>4</span></span>
+            <span class="module-titre"><strong>Choisir le bon type de switch</strong><small>Gouvernance · 7 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>Selon le risque, votre changement relève d'un des trois types&nbsp;:</p>
+            <ul class="coches">
+              <li><strong>Informationnelle</strong> — message, date&nbsp;: pas de demande de changement.</li>
+              <li><strong>Changement standard</strong> — via ServiceNow.</li>
+              <li><strong>Livraison progressive</strong> — exige une MEP&nbsp;: système sur mesure.</li>
+            </ul>
+            <p>📎 Détails&nbsp;: <a href="exampleco.html#types">Chez ExampleCo · Types de switches</a>.</p>
+          </div>
+        </li>
+
+        <li class="module" data-mod="m5">
+          <div class="module-tete">
+            <span class="num"><span>5</span></span>
+            <span class="module-titre"><strong>Réagir : surveiller et couper si besoin</strong><small>Opérations · 5 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>Pendant et après l'activation, surveillez erreurs et métriques d'affaires. En cas de problème, le <strong>kill switch</strong> coupe la fonctionnalité instantanément, sans redéploiement.</p>
+            <p>🧪 Déclenchez un kill switch dans le <a href="sandbox.html">bac à sable</a>.</p>
+          </div>
+        </li>
+      </ul>
+
+      <h2>Mise en situation</h2>
+      <p>Vous êtes PO. La nouvelle page de virements est en production derrière un flag. Que faites-vous&nbsp;?</p>
+      <div class="card" id="scenario">
+        <p class="quiz-q" id="sc-q">Le code est déployé et stable en pré-production. Vous voulez exposer la fonctionnalité à grande échelle dès aujourd'hui à <strong>100 % des membres</strong>. Quelle est la meilleure approche&nbsp;?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-bon="0"><span class="lettre">A</span><span>Activer immédiatement à 100 % pour tous les membres.</span></button>
+          <button class="quiz-opt" data-bon="1"><span class="lettre">B</span><span>Activer progressivement (interne → bêta → 1 % → 10 % → 50 % → 100 %) en surveillant les indicateurs, prêt à couper.</span></button>
+          <button class="quiz-opt" data-bon="0"><span class="lettre">C</span><span>Demander au développeur d'activer en douce sans créer de PR.</span></button>
+        </div>
+        <div class="quiz-explication" id="sc-expl"></div>
+      </div>
+
+      <h2>Évaluation finale</h2>
+      <div class="quiz" data-quiz="metier-1"></div>
+
+      <div id="p-bravo" class="callout succes" style="display:none">
+        <strong>🎉 Parcours complété&nbsp;!</strong> Vous avez parcouru tous les modules. Validez l'évaluation finale ci-dessus.
+      </div>
+
+      <div class="callout note">
+        <strong>Note :</strong> Ce parcours doit être complété avec les informations manquantes au moment de la création du site (exemples concrets ExampleCo, captures d'écran, procédure interne d'activation, contacts et rôles).
+      </div>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="sandbox.html">Aller au bac à sable →</a>
+        <a class="btn btn-fantome" href="parcours-dev.html">Parcours Développeurs</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/data/quiz-data.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/parcours.js"></script>
+  <script>
+    FF.initParcours("metier");
+    // Mise en situation
+    (function () {
+      var sc = document.getElementById("scenario");
+      if (!sc) return;
+      var expl = document.getElementById("sc-expl");
+      var fini = false;
+      sc.querySelectorAll(".quiz-opt").forEach(function (b) {
+        b.addEventListener("click", function () {
+          if (fini) return; fini = true;
+          var bon = b.getAttribute("data-bon") === "1";
+          sc.querySelectorAll(".quiz-opt").forEach(function (x) {
+            x.disabled = true;
+            if (x.getAttribute("data-bon") === "1") x.classList.add("bon");
+          });
+          if (!bon) b.classList.add("mauvais");
+          expl.classList.add("visible");
+          expl.innerHTML = bon
+            ? "<strong>✔ Exact.</strong> Le déploiement progressif limite le rayon d'impact, permet de surveiller les indicateurs et de revenir en arrière via le kill switch. Et le changement passe par la PR SOC2."
+            : "<strong>À revoir.</strong> La bonne réponse est B&nbsp;: un déploiement progressif et surveillé, dans le respect du processus SOC2 (jamais d'activation « en douce »).";
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

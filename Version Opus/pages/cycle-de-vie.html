@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cycle de vie d'un toggle — Gestion & retrait · Formation ExampleCo</title>
+  <meta name="description" content="Le cycle de vie complet d'un feature toggle : création, déploiement progressif, généralisation, retrait, dette de toggle.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="cycle-de-vie">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Cycle de vie</nav>
+      <span class="tag">Référence</span>
+      <h1>Gérer le cycle de vie d'un Feature Toggle</h1>
+      <p class="lede">Un toggle naît, sert un objectif, puis <strong>doit disparaître</strong>. Ignorer son cycle de vie crée de la <em>dette de toggle</em>&nbsp;: du code conditionnel mort qui fragilise l'application.</p>
+
+      <h2>Les étapes</h2>
+      <ol class="etapes">
+        <li><h3>Création &amp; gouvernance</h3><p>Définir clé, type, propriétaire, valeur par défaut sûre et <strong>date de retrait visée</strong>. Inscription au catalogue central.</p></li>
+        <li><h3>Intégration (gating)</h3><p>Le code des deux chemins est écrit, testé (on/off) et mergé. Le flag est déployé « off ».</p></li>
+        <li><h3>Déploiement progressif</h3><p>Activation par paliers&nbsp;: interne → bêta → 1 % → 10 % → 50 % → 100 %, avec surveillance des indicateurs.</p></li>
+        <li><h3>Généralisation</h3><p>La fonctionnalité est exposée à 100 % et jugée stable sur une durée d'observation.</p></li>
+        <li><h3>Retrait (cleanup)</h3><p>On supprime le flag de LaunchDarkly <strong>et</strong> le code conditionnel, en gardant le chemin gagnant. On archive la trace au catalogue.</p></li>
+      </ol>
+
+      <h2>États d'un toggle</h2>
+      <table>
+        <thead><tr><th>État</th><th>Description</th><th>Action attendue</th></tr></thead>
+        <tbody>
+          <tr><td><span class="etat-pastille">Planifié</span></td><td>Décidé, pas encore créé</td><td>Documenter l'intention</td></tr>
+          <tr><td><span class="etat-pastille">Actif (off)</span></td><td>Déployé mais non exposé</td><td>Préparer le rollout</td></tr>
+          <tr><td><span class="etat-pastille actif">En déploiement</span></td><td>Exposition progressive</td><td>Surveiller, ajuster les paliers</td></tr>
+          <tr><td><span class="etat-pastille actif">Généralisé</span></td><td>100 %, stable</td><td>Planifier le retrait</td></tr>
+          <tr><td><span class="etat-pastille">À retirer</span></td><td>Plus utile</td><td>Supprimer code + flag</td></tr>
+        </tbody>
+      </table>
+
+      <h2>La dette de toggle</h2>
+      <div class="callout attention">
+        <strong>Le risque principal :</strong> les toggles « zombies » — généralisés depuis longtemps mais jamais retirés. Ils accumulent des chemins de code morts, compliquent les tests, masquent des bogues et créent de la confusion opérationnelle.
+      </div>
+      <ul class="coches">
+        <li>Fixer une <strong>date de retrait</strong> dès la création.</li>
+        <li>Revue périodique des toggles actifs (« stale flags »).</li>
+        <li>Attribuer un <strong>propriétaire</strong> responsable du retrait.</li>
+        <li>Traiter le retrait comme une tâche planifiée, pas optionnelle.</li>
+      </ul>
+
+      <h2>Mini-audit : ce toggle devrait-il être retiré&nbsp;?</h2>
+      <p>Cochez ce qui s'applique&nbsp;; le verdict s'affiche en direct.</p>
+      <div class="card" id="audit">
+        <label class="switch-ligne" style="cursor:pointer"><label class="switch"><input type="checkbox" data-audit><span class="track"></span><span class="thumb"></span></label><span class="meta"><strong>Exposé à 100 % depuis &gt; 30 jours</strong></span></label>
+        <label class="switch-ligne" style="cursor:pointer"><label class="switch"><input type="checkbox" data-audit><span class="track"></span><span class="thumb"></span></label><span class="meta"><strong>Aucune variation prévue à l'avenir</strong></span></label>
+        <label class="switch-ligne" style="cursor:pointer"><label class="switch"><input type="checkbox" data-audit><span class="track"></span><span class="thumb"></span></label><span class="meta"><strong>Le chemin « off » n'est plus jamais utilisé</strong></span></label>
+        <label class="switch-ligne" style="cursor:pointer"><label class="switch"><input type="checkbox" data-audit><span class="track"></span><span class="thumb"></span></label><span class="meta"><strong>Type « release » (temporaire par nature)</strong></span></label>
+        <div id="audit-verdict" class="callout" style="margin-bottom:0">Cochez les cases pour obtenir un verdict.</div>
+      </div>
+
+      <div class="callout note">
+        <strong>Note :</strong> Cette section doit être complétée avec les informations manquantes au moment de la création du site (processus interne de revue des stale flags chez ExampleCo, fréquence, outillage du catalogue, indicateurs de suivi).
+      </div>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="toggle-ready.html">Suivant : Être « Toggle Ready » →</a>
+        <a class="btn btn-fantome" href="operationnaliser.html">← Mise en œuvre</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script>
+    (function () {
+      var audit = document.getElementById("audit");
+      if (!audit) return;
+      var verdict = document.getElementById("audit-verdict");
+      audit.addEventListener("change", function () {
+        var n = audit.querySelectorAll("[data-audit]:checked").length;
+        verdict.className = "callout";
+        if (n === 0) { verdict.textContent = "Cochez les cases pour obtenir un verdict."; return; }
+        if (n >= 3) { verdict.classList.add("succes"); verdict.innerHTML = "<strong>✔ Candidat clair au retrait.</strong> Planifiez la suppression du code conditionnel et du flag, puis archivez la trace au catalogue."; }
+        else if (n === 2) { verdict.classList.add("note"); verdict.innerHTML = "<strong>À surveiller.</strong> Probablement à retirer bientôt — confirmez avec le propriétaire."; }
+        else { verdict.innerHTML = "<strong>Conserver pour l'instant.</strong> Le toggle semble encore servir un objectif actif."; }
+      });
+    })();
+  </script>
+</body>
+</html>

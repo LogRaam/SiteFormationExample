@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formation LaunchDarkly | Feature Flags chez Desjardins</title>
+    <meta
+      name="description"
+      content="Site de référence et de formation interactif sur l'utilisation des Feature Flags avec LaunchDarkly chez Desjardins."
+    >
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header" id="accueil">
+      <nav class="topbar" aria-label="Navigation principale">
+        <a class="brand" href="#accueil" aria-label="Retour à l'accueil">
+          <span class="brand-mark" aria-hidden="true">LD</span>
+          <span>
+            <strong>Formation LaunchDarkly</strong>
+            <small>Feature Flags | Desjardins</small>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span class="sr-only">Ouvrir le menu</span>
+        </button>
+        <div class="nav-links" id="main-nav">
+          <a href="#reference">Référence</a>
+          <a href="#gouvernance">Gouvernance</a>
+          <a href="#parcours">Parcours</a>
+          <a href="#sandbox">Sandbox</a>
+          <a href="#cycle">Cycle de vie</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <img class="hero-media" src="assets/feature-governance-hero.png" alt="">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Référence et formation interactive</p>
+          <h1>Feature Flags avec LaunchDarkly chez Desjardins</h1>
+          <p>
+            Un guide opérationnel pour concevoir, livrer et gouverner les toggles avec une
+            posture prudente, conforme et orientée risque.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#parcours">Démarrer un parcours</a>
+            <a class="button secondary" href="#reference">Consulter la référence</a>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main id="contenu">
+      <section class="section intro-band" aria-labelledby="resume-title">
+        <div class="section-inner">
+          <div>
+            <p class="eyebrow">Objectif</p>
+            <h2 id="resume-title">Être Toggle Ready avant de livrer</h2>
+            <p>
+              Un feature flag n'est pas seulement un interrupteur technique. C'est un mécanisme
+              de contrôle qui doit être justifié, traçable, testé et retiré au bon moment.
+            </p>
+          </div>
+          <div class="metrics" aria-label="Points clés">
+            <div>
+              <strong>2</strong>
+              <span>parcours ciblés</span>
+            </div>
+            <div>
+              <strong>3</strong>
+              <span>types de switches</span>
+            </div>
+            <div>
+              <strong>SOC2</strong>
+              <span>approbation séparée</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="reference" aria-labelledby="reference-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Référence documentaire</p>
+            <h2 id="reference-title">Comprendre la pratique des Feature Toggles</h2>
+            <p>
+              Les sections suivantes structurent les décisions à prendre avant d'ajouter un flag
+              au code source ou au catalogue central.
+            </p>
+          </div>
+          <div class="reference-grid" id="reference-grid"></div>
+        </div>
+      </section>
+
+      <section class="section split-section" id="gouvernance" aria-labelledby="governance-title">
+        <div class="section-inner split">
+          <div class="section-heading sticky-heading">
+            <p class="eyebrow">Spécificités Desjardins</p>
+            <h2 id="governance-title">Gouvernance, conformité et changements</h2>
+            <p>
+              Les toggles doivent s'inscrire dans les mécanismes de contrôle existants :
+              approbation, catalogue, preuve d'audit et gestion des mises en production.
+            </p>
+          </div>
+          <div class="timeline" id="governance-list"></div>
+        </div>
+      </section>
+
+      <section class="section training" id="parcours" aria-labelledby="training-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Parcours interactifs</p>
+            <h2 id="training-title">Choisir le rôle à former</h2>
+            <p>
+              Chaque parcours combine des modules courts, des mises en situation et un quiz.
+              La progression est conservée dans le navigateur.
+            </p>
+          </div>
+
+          <div class="role-tabs" role="tablist" aria-label="Parcours de formation">
+            <button class="role-tab active" type="button" role="tab" aria-selected="true" data-role="dev">
+              Développeurs
+            </button>
+            <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="business">
+              Product Owners et métiers
+            </button>
+          </div>
+
+          <div class="learning-shell">
+            <aside class="module-list" aria-label="Modules du parcours">
+              <div class="progress-box">
+                <span>Progression</span>
+                <strong id="progress-label">0 %</strong>
+                <div class="progress-track" aria-hidden="true">
+                  <span id="progress-bar"></span>
+                </div>
+              </div>
+              <div id="module-list"></div>
+            </aside>
+
+            <article class="module-panel" id="module-panel" aria-live="polite"></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section sandbox-section" id="sandbox" aria-labelledby="sandbox-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Sandbox</p>
+            <h2 id="sandbox-title">Simuler une activation de flag</h2>
+            <p>
+              Ajustez le ciblage et observez l'effet sur le niveau de risque, le parcours de
+              changement et les contrôles à documenter.
+            </p>
+          </div>
+
+          <div class="sandbox-grid">
+            <form class="sandbox-controls" id="flag-sandbox">
+              <label>
+                Type de switch
+                <select name="type">
+                  <option value="informationnel">Informationnel</option>
+                  <option value="standard">Changement standard ServiceNow</option>
+                  <option value="progressif">Livraison progressive</option>
+                </select>
+              </label>
+              <label>
+                Exposition initiale
+                <input name="rollout" type="range" min="0" max="100" value="10" step="5">
+                <output for="rollout" id="rollout-value">10 %</output>
+              </label>
+              <label>
+                Population ciblée
+                <select name="audience">
+                  <option value="interne">Employés internes</option>
+                  <option value="pilote">Groupe pilote métier</option>
+                  <option value="membres">Membres et clients</option>
+                </select>
+              </label>
+              <label class="check-row">
+                <input name="rollback" type="checkbox" checked>
+                Plan de retour arrière documenté
+              </label>
+              <label class="check-row">
+                <input name="monitoring" type="checkbox">
+                Indicateurs de surveillance définis
+              </label>
+            </form>
+
+            <div class="sandbox-result" id="sandbox-result" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cycle-section" id="cycle" aria-labelledby="cycle-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Cycle de vie</p>
+            <h2 id="cycle-title">De la décision au retrait du toggle</h2>
+            <p>
+              Un toggle qui reste en place sans propriétaire devient une dette opérationnelle.
+              Cette liste sert de contrôle avant, pendant et après la livraison.
+            </p>
+          </div>
+          <div class="lifecycle-grid" id="lifecycle-grid"></div>
+        </div>
+      </section>
+
+      <section class="section readiness-section" aria-labelledby="readiness-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Contrôle final</p>
+            <h2 id="readiness-title">Checklist Toggle Ready</h2>
+          </div>
+          <div class="checklist" id="readiness-checklist"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Formation LaunchDarkly</strong>
+        <p>
+          Site statique HTML5/CSS/JavaScript. Les sections marquées d'une note doivent être
+          complétées avec les artefacts internes disponibles.
+        </p>
+      </div>
+      <a href="#accueil">Retour en haut</a>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

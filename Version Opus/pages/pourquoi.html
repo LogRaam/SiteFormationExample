@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pourquoi un toggle — Réflexion Affaires & Architecture · Formation ExampleCo</title>
+  <meta name="description" content="Quand et pourquoi décider d'utiliser un feature toggle : valeur d'affaires, risque, architecture, critères de décision.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="pourquoi">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Pourquoi un toggle</nav>
+      <span class="tag">Référence</span>
+      <h1>Pourquoi (et quand) utiliser un Feature Toggle&nbsp;?</h1>
+      <p class="lede">Un toggle n'est jamais gratuit&nbsp;: il ajoute de la complexité et de la dette potentielle. La décision de l'utiliser doit naître d'une réflexion conjointe entre <strong>les Affaires</strong> et <strong>l'Architecture</strong>.</p>
+
+      <h2>Deux questions avant toute chose</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="tag metier">Affaires</span>
+          <h3>Quelle valeur, quel risque&nbsp;?</h3>
+          <ul class="coches">
+            <li>Quelle décision d'affaires veut-on pouvoir prendre <em>après</em> le déploiement&nbsp;?</li>
+            <li>A-t-on besoin de cibler une audience, un moment, un pourcentage&nbsp;?</li>
+            <li>Quel est l'impact si la fonctionnalité doit être coupée d'urgence&nbsp;?</li>
+            <li>Qui sera <strong>propriétaire</strong> de la décision d'activation&nbsp;?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag dev">Architecture</span>
+          <h3>Quel coût, quelle maîtrise&nbsp;?</h3>
+          <ul class="coches">
+            <li>Où placer le point de décision (gating) pour rester testable&nbsp;?</li>
+            <li>Le toggle traverse-t-il plusieurs services&nbsp;? (cohérence)</li>
+            <li>Quelle est la valeur par défaut <strong>sûre</strong> en cas de panne&nbsp;?</li>
+            <li>Quand et comment le retirera-t-on&nbsp;? (cycle de vie)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Les bonnes raisons d'utiliser un toggle</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-icone">📉</div><h3>Réduire le risque</h3><p class="muted">Déploiement progressif + retour arrière instantané sans MEP d'urgence.</p></div>
+        <div class="card"><div class="card-icone">🧭</div><h3>Donner le contrôle aux Affaires</h3><p class="muted">Le moment d'activation devient une décision métier, pas un événement technique.</p></div>
+        <div class="card"><div class="card-icone">🔬</div><h3>Apprendre</h3><p class="muted">Expérimenter, comparer, mesurer sur une fraction des utilisateurs.</p></div>
+        <div class="card"><div class="card-icone">🔀</div><h3>Découpler les équipes</h3><p class="muted">Intégrer du code en continu (trunk-based) sans bloquer la livraison.</p></div>
+        <div class="card"><div class="card-icone">🚦</div><h3>Coordonner une bascule</h3><p class="muted">Activer une fonctionnalité au bon moment (campagne, date réglementaire).</p></div>
+        <div class="card"><div class="card-icone">🛑</div><h3>Pouvoir tout couper</h3><p class="muted">Kill switch pour une intégration sensible ou coûteuse.</p></div>
+      </div>
+
+      <h2>Les mauvaises raisons (signaux d'alerte)</h2>
+      <ul class="croix">
+        <li>« On met un flag au cas où » — sans propriétaire ni date de retrait&nbsp;: futur déchet.</li>
+        <li>Utiliser un toggle pour gérer une <strong>configuration permanente</strong> (préférez la configuration).</li>
+        <li>Utiliser un toggle comme <strong>mécanisme d'autorisation/sécurité</strong> (préférez un vrai contrôle d'accès).</li>
+        <li>Multiplier les toggles imbriqués au point de ne plus pouvoir tester les combinaisons.</li>
+        <li>Contourner la revue de code ou les tests « parce que c'est derrière un flag ».</li>
+      </ul>
+
+      <h2>Arbre de décision</h2>
+      <p>Un raccourci pour orienter la discussion Affaires + Architecture&nbsp;:</p>
+      <div class="flux">
+        <div class="noeud"><span class="ic">❓</span>Besoin de contrôler l'<strong>exposition</strong> après déploiement&nbsp;?</div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">⏳</span>Est-ce <strong>temporaire</strong> (le temps d'un déploiement)&nbsp;?</div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">🚩</span><strong>Toggle de release</strong><br><small>avec date de retrait</small></div>
+      </div>
+      <div class="flux">
+        <div class="noeud"><span class="ic">📊</span>Besoin de <strong>mesurer/comparer</strong> des variantes&nbsp;?</div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">🔬</span><strong>Toggle d'expérimentation</strong></div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">🛑</span>Besoin de <strong>couper en urgence</strong>&nbsp;? → <strong>Toggle ops / kill switch</strong></div>
+      </div>
+
+      <div class="callout">
+        <strong>Règle d'or :</strong> tout toggle doit avoir, dès sa création, un <strong>propriétaire</strong>, un <strong>type</strong>, une <strong>valeur par défaut sûre</strong> et une <strong>intention de retrait</strong>. Sans cela, ne le créez pas.
+      </div>
+
+      <h2>Vérifiez votre compréhension</h2>
+      <div class="quiz" data-quiz="dev-1"></div>
+
+      <div class="callout note">
+        <strong>Note :</strong> Cette section doit être complétée avec les informations manquantes au moment de la création du site (critères de décision internes ExampleCo, exemples réels d'arbitrages Affaires/Architecture, modèles de fiche de toggle).
+      </div>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="operationnaliser.html">Suivant : Mise en œuvre →</a>
+        <a class="btn btn-fantome" href="concepts.html">← Concepts</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/data/quiz-data.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+</body>
+</html>

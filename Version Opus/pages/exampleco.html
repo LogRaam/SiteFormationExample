@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chez ExampleCo — SOC2, catalogue & types de switches · Formation</title>
+  <meta name="description" content="Spécificités ExampleCo : exigence SOC2 (PR automatique), catalogue central de switches, et les trois types de switches.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="exampleco">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Chez ExampleCo</nav>
+      <span class="tag">Gouvernance · Conformité</span>
+      <h1>Les Feature Toggles chez ExampleCo</h1>
+      <p class="lede">L'usage des feature flags chez ExampleCo s'inscrit dans un cadre de <strong>gouvernance, de conformité et de gestion du risque</strong>. Trois éléments structurent cette pratique&nbsp;: l'exigence SOC2, le catalogue central et la typologie des switches.</p>
+
+      <h2 id="soc2">1. Exigence SOC2 — séparation des tâches</h2>
+      <div class="callout soc2">
+        <strong>Règle :</strong> chez ExampleCo, <strong>chaque modification d'un flag déclenche automatiquement la création d'une Pull Request</strong>. Cette PR doit être <strong>approuvée par une personne différente de celle qui a initié le changement</strong>. C'est une exigence de conformité <strong>SOC2</strong> (principe de séparation des tâches / <em>segregation of duties</em>).
+      </div>
+
+      <h3>Pourquoi&nbsp;?</h3>
+      <ul class="coches">
+        <li><strong>Traçabilité :</strong> chaque changement de flag laisse une trace auditable (qui, quoi, quand, approuvé par qui).</li>
+        <li><strong>Contrôle :</strong> aucun changement sensible ne repose sur une seule personne (« quatre yeux »).</li>
+        <li><strong>Réversibilité documentée :</strong> l'historique des PR permet de comprendre et défaire un changement.</li>
+      </ul>
+
+      <h3>Le flux</h3>
+      <div class="flux">
+        <div class="noeud"><span class="ic">✏️</span>Modification d'un flag<br><small>(activation, %, ciblage)</small></div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">🔀</span>PR créée <strong>automatiquement</strong></div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">👀</span>Revue par un <strong>pair</strong><br><small>(≠ auteur)</small></div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">✅</span>Approbation &amp; fusion</div>
+        <div class="fleche">→</div>
+        <div class="noeud"><span class="ic">🟢</span>Changement effectif</div>
+      </div>
+
+      <div class="callout note">
+        <strong>Note :</strong> Cette section doit être complétée avec les informations manquantes au moment de la création du site (outil de PR utilisé, délais d'approbation, rôles habilités à approuver, captures d'écran du flux réel, exceptions éventuelles).
+      </div>
+
+      <h2 id="catalogue">2. Le catalogue central de toggle switches</h2>
+      <p>ExampleCo maintient un <strong>catalogue central</strong> recensant l'ensemble des toggle switches de l'organisation. Il constitue la source de vérité pour gouverner les switches.</p>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-icone">🗂️</div><h3>Recenser</h3><p class="muted">Vue unique de tous les switches&nbsp;: clé, description, état, environnement.</p></div>
+        <div class="card"><div class="card-icone">🏷️</div><h3>Classer</h3><p class="muted">Type de switch, propriétaire, domaine d'affaires, date de retrait.</p></div>
+        <div class="card"><div class="card-icone">⚖️</div><h3>Gouverner</h3><p class="muted">Conformité, revue des stale flags, audit et reddition de comptes.</p></div>
+      </div>
+      <div class="placeholder">
+        <strong>Note :</strong> Cette section doit être complétée avec les informations manquantes au moment de la création du site (nom et accès du catalogue central, champs obligatoires d'une fiche de switch, processus d'inscription, captures d'écran).
+      </div>
+
+      <h2 id="types">3. Les trois types de switches</h2>
+      <p>Chez ExampleCo, on distingue trois catégories de switches, selon leur niveau de risque et le processus de changement associé.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="actif" data-tab="info">① Informationnelle</button>
+          <button data-tab="standard">② Changement standard</button>
+          <button data-tab="progressive">③ Livraison progressive</button>
+        </div>
+        <div class="tab-panel actif" data-panel="info">
+          <h3>① Switch informationnelle</h3>
+          <p>Changement à <strong>faible risque</strong>&nbsp;: modification d'un message, d'une date d'affichage, d'un contenu informatif. <strong>N'exige pas de demande de changement.</strong></p>
+          <ul class="coches">
+            <li>Exemples&nbsp;: bandeau d'information, date d'une promotion, libellé.</li>
+            <li>Pas de demande de changement formelle requise.</li>
+            <li>Reste soumise à la PR automatique SOC2.</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-panel="standard">
+          <h3>② Switch avec changement standard (ServiceNow)</h3>
+          <p>Changement encadré par un <strong>changement standard via ServiceNow</strong>. Le processus de gestion du changement classique s'applique.</p>
+          <ul class="coches">
+            <li>Passe par un <strong>changement standard ServiceNow</strong>.</li>
+            <li>Adapté aux modifications à risque modéré et bien cadrées.</li>
+            <li>Traçabilité via l'enregistrement de changement.</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-panel="progressive">
+          <h3>③ Switch de livraison progressive</h3>
+          <p>Concerne une <strong>livraison progressive</strong> qui <strong>exige une mise en production (MEP)</strong>. ServiceNow n'étant pas conçu pour ce type d'orchestration, ExampleCo s'appuie sur un <strong>système sur mesure</strong>.</p>
+          <ul class="coches">
+            <li>Déploiement par paliers exigeant une mise en production.</li>
+            <li><strong>Système sur mesure</strong> — ServiceNow n'est pas adapté à ce besoin.</li>
+            <li>Surveillance et capacité de retour arrière (kill switch).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Comparatif</h3>
+      <table>
+        <thead><tr><th>Type</th><th>Niveau de risque</th><th>Processus de changement</th><th>Outil</th></tr></thead>
+        <tbody>
+          <tr><td>① Informationnelle</td><td>Faible</td><td>Aucune demande de changement</td><td>—</td></tr>
+          <tr><td>② Changement standard</td><td>Modéré</td><td>Changement standard</td><td>ServiceNow</td></tr>
+          <tr><td>③ Livraison progressive</td><td>Élevé (MEP)</td><td>Mise en production orchestrée</td><td>Système sur mesure</td></tr>
+        </tbody>
+      </table>
+      <div class="callout note">
+        <strong>Note :</strong> Cette section doit être complétée avec les informations manquantes au moment de la création du site (critères précis de classification entre les trois types, exemples concrets ExampleCo, nom du système sur mesure, rôles et responsabilités, SLA).
+      </div>
+
+      <h2>Vérifiez votre compréhension</h2>
+      <div class="quiz" data-quiz="exampleco-1"></div>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="parcours-metier.html">Parcours Métier / PO →</a>
+        <a class="btn btn-fantome" href="sandbox.html">Voir le flux SOC2 en action (bac à sable)</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/data/quiz-data.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+</body>
+</html>

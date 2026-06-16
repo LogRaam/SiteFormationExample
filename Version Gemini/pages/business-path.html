@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours Métier - LaunchDarkly Desjardins</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .quiz-container {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 2px solid var(--desjardins-blue);
+        }
+        .question {
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .options {
+            margin-bottom: 1rem;
+        }
+        .option {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .option:hover {
+            background: #f0f0f0;
+        }
+        .option.correct {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        #quizResult {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>LaunchDarkly @ Desjardins</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="dev-path.html">Développeurs</a></li>
+                <li><a href="business-path.html">Utilisateurs Métier</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Parcours Utilisateur Métier</h2>
+        
+        <section>
+            <h3>1. Réflexion Conceptuelle</h3>
+            <p>Avant de créer un toggle, il est crucial de définir son but : Est-ce un toggle de livraison (temporaire) ou opérationnel (long terme) ? Cette réflexion doit inclure les Affaires et l'Architecture.</p>
+        </section>
+
+        <section>
+            <h3>2. Catalogue Central de Toggles</h3>
+            <p>Chez Desjardins, tous les toggles doivent être répertoriés dans le Catalogue Central pour assurer une visibilité et une gouvernance optimales.</p>
+            <div class="placeholder-note">
+                <strong>Note :</strong> Cette section doit être complétée avec des captures d'écran du Catalogue Central Desjardins.
+            </div>
+        </section>
+
+        <section>
+            <h3>3. Types de Switches</h3>
+            <ul>
+                <li><strong>Informationnelles :</strong> Pour afficher des messages ou des bannières.</li>
+                <li><strong>Standard ServiceNow :</strong> Intégration avec le processus de changement officiel.</li>
+                <li><strong>Livraisons Progressives :</strong> Système sur mesure pour déployer par vagues.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Quiz de Validation</h3>
+            <p>Testez vos connaissances sur la gestion des Feature Flags chez Desjardins.</p>
+            
+            <div class="quiz-container" id="quiz">
+                <div id="quizContent">
+                    <div class="question">Quelle est la durée de vie recommandée pour un Toggle de Livraison ?</div>
+                    <div class="options">
+                        <div class="option" data-correct="false">Indéfinie</div>
+                        <div class="option" data-correct="true">Temporaire (jusqu'à la fin du déploiement)</div>
+                        <div class="option" data-correct="false">Minimum 2 ans</div>
+                    </div>
+                </div>
+                <button id="nextQuestionBtn" class="btn btn-blue" style="display:none;">Question suivante</button>
+                <div id="quizResult"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Desjardins - Portail de formation LaunchDarkly</p>
+    </footer>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/quiz.js"></script>
+</body>
+</html>

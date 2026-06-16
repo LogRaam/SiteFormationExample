@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours Développeur - LaunchDarkly Desjardins</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .sandbox {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 2rem;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 2rem 0;
+        }
+        .code-output {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid #444;
+            background: #1e2127;
+            min-height: 50px;
+        }
+        .toggle-control {
+            margin-bottom: 1rem;
+        }
+        .feature-on { color: #98c379; font-weight: bold; }
+        .feature-off { color: #e06c75; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>LaunchDarkly @ Desjardins</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="dev-path.html">Développeurs</a></li>
+                <li><a href="business-path.html">Utilisateurs Métier</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Parcours Développeur</h2>
+        
+        <section>
+            <h3>1. Implémentation du SDK</h3>
+            <p>L'intégration du SDK LaunchDarkly chez Desjardins suit des standards de sécurité stricts. Assurez-vous d'utiliser les clés d'environnement appropriées (Client-side vs Server-side).</p>
+            <div class="placeholder-note">
+                <strong>Note :</strong> Cette section doit être complétée avec des exemples de code spécifiques (Java/TS/C#) utilisés chez Desjardins.
+            </div>
+        </section>
+
+        <section>
+            <h3>2. SOC2 et PR Automatiques</h3>
+            <p>Toute création ou modification de flag doit passer par un processus d'approbation. Chez Desjardins, une PR automatique est générée pour chaque changement de configuration, nécessitant une approbation par une tierce personne.</p>
+        </section>
+
+        <section>
+            <h3>3. Être "Toggle Ready"</h3>
+            <p>Un code Toggle Ready est un code qui peut être désactivé instantanément sans impact sur la stabilité du système. Évitez les dépendances circulaires entre les flags.</p>
+        </section>
+
+        <section>
+            <h3>Simulation Interactive : Sandbox de Toggle</h3>
+            <p>Expérimentez comment le code réagit dynamiquement au changement d'un flag.</p>
+            
+            <div class="sandbox" id="sandbox">
+                <div class="toggle-control">
+                    <label>État du Flag (Simulation): </label>
+                    <button id="toggleFlagBtn" class="btn">Désactivé</button>
+                </div>
+                <div class="code-block">
+                    <code>
+                        if (ldClient.variation("nouveau-calcul-interet", user)) { <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.log("Exécution de la nouvelle logique..."); <br>
+                        } else { <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.log("Logique standard active."); <br>
+                        }
+                    </code>
+                </div>
+                <div class="code-output" id="sandboxOutput">
+                    > Logique standard active.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Desjardins - Portail de formation LaunchDarkly</p>
+    </footer>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/sandbox.js"></script>
+</body>
+</html>

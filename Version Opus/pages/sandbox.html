@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bac à sable — Simulateur de déploiement progressif · Formation ExampleCo</title>
+  <meta name="description" content="Simulateur interactif : activer un flag, piloter un déploiement progressif, cibler une audience, déclencher un kill switch et visualiser le flux SOC2.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="sandbox">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Bac à sable</nav>
+      <span class="tag">Interactif · Simulation</span>
+      <h1>Bac à sable : déploiement progressif</h1>
+      <p class="lede">Pilotez un flag fictif <code>nouvelle-page-virements</code> sur une population simulée de 40 membres. Aucune donnée réelle, aucun appel réseau — tout se passe dans votre navigateur.</p>
+
+      <div id="sandbox" class="sandbox-grille">
+
+        <!-- Colonne contrôle -->
+        <div class="panneau">
+          <h3>🎛️ Contrôles</h3>
+
+          <div class="switch-ligne">
+            <label class="switch"><input type="checkbox" id="sb-actif"><span class="track"></span><span class="thumb"></span></label>
+            <div class="meta"><strong>Activer le flag</strong><small>Interrupteur principal</small></div>
+          </div>
+
+          <label class="muted" style="font-weight:700;font-size:.9rem">Palier de déploiement</label>
+          <div class="range-ligne">
+            <input type="range" id="sb-rollout" min="0" max="100" step="1" value="0" aria-label="Pourcentage de déploiement">
+            <span class="range-val" id="sb-rollout-val">0 %</span>
+          </div>
+          <div class="pill-row" style="margin-bottom:1.2rem">
+            <button class="btn btn-fantome" data-palier="1">1 %</button>
+            <button class="btn btn-fantome" data-palier="10">10 %</button>
+            <button class="btn btn-fantome" data-palier="50">50 %</button>
+            <button class="btn btn-fantome" data-palier="100">100 %</button>
+          </div>
+
+          <label class="muted" style="font-weight:700;font-size:.9rem;display:block;margin-bottom:.4rem">Audience cible</label>
+          <div class="segments" style="margin-bottom:1.2rem">
+            <button data-cible="tous" class="actif">Tous</button>
+            <button data-cible="beta">Bêta (β)</button>
+            <button data-cible="interne">Interne (i)</button>
+          </div>
+
+          <div class="pill-row">
+            <button class="btn btn-primaire" id="sb-kill">🛑 Kill switch</button>
+            <button class="btn btn-fantome" id="sb-reset">↻ Réinitialiser</button>
+          </div>
+
+          <div id="sb-pr" style="margin-top:1.2rem"></div>
+        </div>
+
+        <!-- Colonne visualisation -->
+        <div class="panneau">
+          <h3>👥 Population simulée</h3>
+          <p class="muted mb-0" id="sb-etat-texte">⏸ Flag désactivé — personne n'est exposé</p>
+          <p class="muted" style="font-size:.85rem"><span style="color:var(--vert-700);font-weight:700">Vert</span> = exposition <strong>approuvée</strong> (effective). <span style="font-weight:700">Gris pointillé</span> = changement <strong>proposé</strong>, en attente d'approbation. <strong>β</strong> = bêta-testeur, <strong>i</strong> = interne.</p>
+          <div id="sb-membres" style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:1rem"></div>
+          <p class="center"><strong id="sb-exposes">0 / 40 membres exposés</strong></p>
+
+          <h3>📋 Journal d'événements</h3>
+          <div class="journal" id="sb-journal"></div>
+        </div>
+      </div>
+
+      <div class="callout soc2 mt-2">
+        <strong>Observez :</strong> un changement de flag (activation, palier, audience) est d'abord <strong>proposé</strong> — les cellules concernées passent en <strong>gris pointillé</strong> et une <strong>PR automatique (SOC2)</strong> est créée. L'exposition ne devient <strong>verte (effective)</strong> qu'une fois la PR <strong>approuvée</strong> par un pair. Le <strong>kill switch</strong>, lui, agit immédiatement : c'est l'exception « urgence ». Exactement comme chez ExampleCo.
+      </div>
+
+      <h2>Exercices suggérés</h2>
+      <div class="grid grid-2">
+        <div class="card"><h3>1 · Rollout canari</h3><p class="muted">Activez le flag, ciblez « Interne », montez à 100 %. Combien de membres sont exposés&nbsp;? Pourquoi&nbsp;?</p></div>
+        <div class="card"><h3>2 · Bêta d'abord</h3><p class="muted">Ciblez « Bêta » à 100 %, puis repassez à « Tous » à 10 %. Comparez l'exposition.</p></div>
+        <div class="card"><h3>3 · Incident</h3><p class="muted">À 50 % « Tous », déclenchez le kill switch. Que devient l'exposition&nbsp;? En combien de temps&nbsp;?</p></div>
+        <div class="card"><h3>4 · Conformité</h3><p class="muted">Faites un changement, puis approuvez la PR générée. Repérez la trace dans le journal.</p></div>
+      </div>
+
+      <div class="callout note">
+        <strong>Note :</strong> Ce simulateur est une représentation pédagogique simplifiée. Il doit être complété, le cas échéant, avec les éléments réels de l'environnement ExampleCo (segments réels, métriques surveillées, intégration au catalogue).
+      </div>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="exampleco.html">Comprendre le cadre ExampleCo →</a>
+        <a class="btn btn-fantome" href="parcours-metier.html">← Parcours Métier</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/sandbox.js"></script>
+  <script>
+    // Boutons de palier rapide -> agissent sur le curseur
+    (function () {
+      document.querySelectorAll("[data-palier]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var r = document.getElementById("sb-rollout");
+          r.value = b.getAttribute("data-palier");
+          r.dispatchEvent(new Event("input"));
+          r.dispatchEvent(new Event("change"));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

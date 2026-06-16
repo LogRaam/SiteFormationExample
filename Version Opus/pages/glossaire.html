@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glossaire — Vocabulaire des Feature Flags · Formation ExampleCo</title>
+  <meta name="description" content="Glossaire des termes essentiels : feature toggle, kill switch, déploiement progressif, gating, SOC2, bucketing, et plus.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="glossaire">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Glossaire</nav>
+      <span class="tag">Référence</span>
+      <h1>Glossaire</h1>
+      <p class="lede">Le vocabulaire essentiel des feature flags, dans le contexte de LaunchDarkly et de ExampleCo.</p>
+
+      <input type="search" id="g-recherche" placeholder="🔎 Filtrer les termes…" aria-label="Filtrer les termes"
+        style="width:100%;padding:.8rem 1rem;border:1px solid var(--bordure);border-radius:10px;font-size:1rem;font-family:inherit;background:var(--surface);color:var(--texte);margin-bottom:1.5rem">
+
+      <div id="g-liste">
+        <details class="accordeon" data-terme="feature toggle flag interrupteur fonctionnalité"><summary>Feature Toggle / Feature Flag</summary><div class="corps">Interrupteur logiciel permettant d'activer ou de désactiver une fonctionnalité sans redéployer le code. Synonymes&nbsp;: <em>flag</em>, <em>switch</em>, interrupteur de fonctionnalité.</div></details>
+        <details class="accordeon" data-terme="déploiement progressif rollout canari paliers"><summary>Déploiement progressif (rollout)</summary><div class="corps">Activation graduelle d'une fonctionnalité par paliers (ex. 1 % → 10 % → 50 % → 100 %) afin de limiter le rayon d'impact et de surveiller les indicateurs. Un premier petit palier est parfois appelé « canari ».</div></details>
+        <details class="accordeon" data-terme="kill switch coupure urgence"><summary>Kill switch</summary><div class="corps">Capacité de désactiver instantanément une fonctionnalité problématique sans redéploiement, pour réduire le temps de réaction lors d'un incident.</div></details>
+        <details class="accordeon" data-terme="gating point de décision condition"><summary>Gating</summary><div class="corps">Point du code où l'on évalue un flag pour bifurquer entre deux comportements. Un bon gating est centralisé, lisible et testable.</div></details>
+        <details class="accordeon" data-terme="valeur par défaut fallback défaut sûr"><summary>Valeur par défaut (fallback)</summary><div class="corps">Valeur retournée par le SDK si le service de flags est injoignable. Elle doit correspondre au comportement existant et sûr.</div></details>
+        <details class="accordeon" data-terme="contexte utilisateur user context ciblage"><summary>Contexte (context)</summary><div class="corps">Ensemble d'attributs (ex. id de membre, segment) fournis au SDK pour évaluer un flag de façon ciblée et reproductible.</div></details>
+        <details class="accordeon" data-terme="bucketing pourcentage hash répartition"><summary>Bucketing</summary><div class="corps">Mécanisme qui répartit de façon déterministe les utilisateurs dans des « seaux » selon un hachage de leur clé, afin d'appliquer un pourcentage de rollout de manière cohérente.</div></details>
+        <details class="accordeon" data-terme="segment audience cible groupe"><summary>Segment</summary><div class="corps">Groupe d'utilisateurs défini par des critères (ex. bêta-testeurs, employés internes) que l'on peut cibler avec un flag.</div></details>
+        <details class="accordeon" data-terme="variation variante on off"><summary>Variation</summary><div class="corps">Une des valeurs possibles d'un flag&nbsp;: ON/OFF pour un booléen, ou plusieurs valeurs pour un flag multivarié (chaîne, nombre, JSON).</div></details>
+        <details class="accordeon" data-terme="dette toggle zombie stale flag mort"><summary>Dette de toggle (stale flag)</summary><div class="corps">Accumulation de toggles obsolètes jamais retirés, créant du code conditionnel mort qui complique tests et maintenance.</div></details>
+        <details class="accordeon" data-terme="trunk based development intégration continue"><summary>Trunk-based development</summary><div class="corps">Pratique consistant à intégrer fréquemment sur une branche principale&nbsp;; les feature toggles permettent de livrer du code incomplet sans l'exposer.</div></details>
+        <details class="accordeon" data-terme="soc2 conformité séparation des tâches pull request pr approbation"><summary>SOC2</summary><div class="corps">Cadre de conformité. Chez ExampleCo, toute modification de flag crée automatiquement une Pull Request devant être approuvée par une personne différente de l'auteur (séparation des tâches).</div></details>
+        <details class="accordeon" data-terme="catalogue central switches gouvernance"><summary>Catalogue central</summary><div class="corps">Référentiel ExampleCo recensant et classant l'ensemble des toggle switches&nbsp;: type, propriétaire, état, conformité.</div></details>
+        <details class="accordeon" data-terme="servicenow changement standard"><summary>Changement standard (ServiceNow)</summary><div class="corps">Processus de gestion du changement utilisé pour les switches à risque modéré. Inadapté aux livraisons progressives, qui exigent un système sur mesure.</div></details>
+        <details class="accordeon" data-terme="sdk launchdarkly client bibliothèque"><summary>SDK</summary><div class="corps">Bibliothèque intégrée à l'application qui interroge LaunchDarkly, met en cache les règles et évalue les flags pour un contexte donné.</div></details>
+        <details class="accordeon" data-terme="mep mise en production livraison"><summary>Mise en production (MEP)</summary><div class="corps">Étape de déploiement orchestré requise pour les switches de livraison progressive chez ExampleCo.</div></details>
+      </div>
+
+      <p id="g-vide" class="muted center" style="display:none">Aucun terme ne correspond à votre recherche.</p>
+
+      <div class="callout note">
+        <strong>Note :</strong> Ce glossaire doit être complété avec les termes et définitions propres au vocabulaire interne de ExampleCo (noms d'outils, rôles, acronymes spécifiques).
+      </div>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="../index.html">Retour à l'accueil →</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script>
+    (function () {
+      var input = document.getElementById("g-recherche");
+      var items = Array.prototype.slice.call(document.querySelectorAll("#g-liste .accordeon"));
+      var vide = document.getElementById("g-vide");
+      input.addEventListener("input", function () {
+        var q = input.value.trim().toLowerCase();
+        var visibles = 0;
+        items.forEach(function (it) {
+          var hay = (it.getAttribute("data-terme") + " " + it.textContent).toLowerCase();
+          var ok = hay.indexOf(q) !== -1;
+          it.style.display = ok ? "" : "none";
+          if (ok) visibles++;
+        });
+        vide.style.display = visibles === 0 ? "block" : "none";
+      });
+    })();
+  </script>
+</body>
+</html>

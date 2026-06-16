@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature Flags avec LaunchDarkly · Formation & Référence — ExampleCo</title>
+  <meta name="description" content="Référence documentaire et parcours de formation interactif sur l'usage des Feature Toggles / Feature Flags avec LaunchDarkly dans le contexte de gouvernance de ExampleCo.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body data-page="index">
+  <div id="site-header"></div>
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="badge-fil">🚩 LaunchDarkly · Feature Toggles · Gouvernance ExampleCo</span>
+      <h1>Maîtriser les Feature Flags, de la théorie à la production</h1>
+      <p class="lede">Un site de <strong>référence</strong> et un <strong>parcours de formation interactif</strong> pour comprendre, mettre en œuvre et gouverner les Feature Toggles avec LaunchDarkly — dans le respect des exigences de conformité, de sécurité et de gestion du risque de ExampleCo.</p>
+      <div class="actions">
+        <a class="btn btn-primaire" href="pages/parcours-dev.html">Parcours Développeurs →</a>
+        <a class="btn btn-secondaire" href="pages/parcours-metier.html">Parcours Métier / PO →</a>
+      </div>
+    </div>
+  </section>
+
+  <main id="contenu">
+    <div class="wrap">
+
+      <section class="section">
+        <h2 class="mt-0">Pourquoi un Feature Flag&nbsp;?</h2>
+        <p class="lede">Un <strong>Feature Toggle</strong> (ou <em>feature flag</em>) est un interrupteur logiciel qui permet d'<strong>activer ou désactiver une fonctionnalité sans redéployer le code</strong>. Il sépare le moment de la <em>livraison</em> du code de celui de son <em>exposition</em> aux utilisateurs.</p>
+
+        <div class="grid grid-3 mt-2">
+          <div class="card">
+            <div class="card-icone">⏱️</div>
+            <h3>Déployer ≠ Exposer</h3>
+            <p class="muted">Le code part en production « éteint ». On choisit ensuite <em>qui</em>, <em>quand</em> et <em>combien</em> y ont accès.</p>
+          </div>
+          <div class="card">
+            <div class="card-icone">🛟</div>
+            <h3>Réduire le risque</h3>
+            <p class="muted">Déploiement progressif et <strong>kill switch</strong> : on limite le rayon d'impact et on revient en arrière en quelques secondes.</p>
+          </div>
+          <div class="card">
+            <div class="card-icone">🎯</div>
+            <h3>Cibler finement</h3>
+            <p class="muted">Activer pour un segment (bêta, interne, région) avant la généralisation.</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="section">
+        <h2 class="mt-0">Choisissez votre parcours</h2>
+        <p class="lede">Deux parcours interactifs distincts, selon votre rôle.</p>
+        <div class="grid grid-2 mt-1">
+          <a class="card card-lien" href="pages/parcours-dev.html">
+            <span class="tag dev">Technique</span>
+            <h3>👩‍💻 Développeurs</h3>
+            <p class="muted">Mettre en place un feature toggle proprement : SDK, évaluation, valeur par défaut, tests des deux états, gating et retrait. Quiz et exemples de code inclus.</p>
+            <p><strong>Commencer le parcours →</strong></p>
+          </a>
+          <a class="card card-lien" href="pages/parcours-metier.html">
+            <span class="tag metier">Pilotage</span>
+            <h3>🧭 Métier / Product Owners</h3>
+            <p class="muted">Activer, désactiver et piloter un toggle en toute sécurité : valeur d'affaires, audiences, déploiement progressif, processus SOC2 et catalogue. Mises en situation incluses.</p>
+            <p><strong>Commencer le parcours →</strong></p>
+          </a>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="section">
+        <h2 class="mt-0">Explorer la référence</h2>
+        <div class="grid grid-3 mt-1">
+          <a class="card card-lien" href="pages/concepts.html"><div class="card-icone">📘</div><h3>Concepts</h3><p class="muted">La pratique des Feature Toggles, les grands types de toggles.</p></a>
+          <a class="card card-lien" href="pages/pourquoi.html"><div class="card-icone">🧠</div><h3>Pourquoi</h3><p class="muted">La réflexion Affaires + Architecture avant de créer un toggle.</p></a>
+          <a class="card card-lien" href="pages/operationnaliser.html"><div class="card-icone">⚙️</div><h3>Mise en œuvre</h3><p class="muted">Le code source et la création de toggles dans LaunchDarkly.</p></a>
+          <a class="card card-lien" href="pages/cycle-de-vie.html"><div class="card-icone">🔄</div><h3>Cycle de vie</h3><p class="muted">Gérer un toggle de sa création à son retrait (dette de toggle).</p></a>
+          <a class="card card-lien" href="pages/toggle-ready.html"><div class="card-icone">✅</div><h3>Toggle Ready</h3><p class="muted">Bonnes pratiques de développement, gating, conventions.</p></a>
+          <a class="card card-lien" href="pages/exampleco.html"><div class="card-icone">🏛️</div><h3>Chez ExampleCo</h3><p class="muted">SOC2, catalogue central, trois types de switches.</p></a>
+          <a class="card card-lien" href="pages/sandbox.html"><div class="card-icone">🧪</div><h3>Bac à sable</h3><p class="muted">Simuler un déploiement progressif et un kill switch.</p></a>
+          <a class="card card-lien" href="pages/glossaire.html"><div class="card-icone">📖</div><h3>Glossaire</h3><p class="muted">Le vocabulaire essentiel des feature flags.</p></a>
+        </div>
+      </section>
+
+      <section class="section mt-2">
+        <div class="callout soc2">
+          <strong>🔐 Spécificité ExampleCo — SOC2&nbsp;:</strong> chez ExampleCo, <strong>chaque modification d'un flag déclenche automatiquement la création d'une Pull Request</strong>, qui doit être <strong>approuvée par une personne autre que l'auteur</strong>. Cette séparation des tâches est tracée et auditable. Détails dans la section <a href="pages/exampleco.html">Chez ExampleCo</a>.
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

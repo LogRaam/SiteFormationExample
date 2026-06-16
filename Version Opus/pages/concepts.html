@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Concepts — La pratique des Feature Toggles · Formation ExampleCo</title>
+  <meta name="description" content="Définition, intérêt et grands types de Feature Toggles : release, expérimentation, ops, permission.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="concepts">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Concepts</nav>
+      <span class="tag">Référence</span>
+      <h1>La pratique des Feature Toggles</h1>
+      <p class="lede">Comprendre ce qu'est un feature toggle, ce qu'il n'est pas, et distinguer ses grands types pour l'utiliser à bon escient.</p>
+
+      <h2>Définition</h2>
+      <p>Un <strong>Feature Toggle</strong> (aussi appelé <em>feature flag</em>, <em>switch</em> ou <em>interrupteur de fonctionnalité</em>) est un mécanisme qui permet de <strong>modifier le comportement d'une application sans modifier ni redéployer son code</strong>. Concrètement, le code contient une condition&nbsp;:</p>
+
+      <pre><code>if (client.estActif("nouvelle-page-virements")) {
+    afficherNouvellePage();   // nouveau comportement
+} else {
+    afficherAnciennePage();   // comportement existant (sûr)
+}</code></pre>
+
+      <p>La valeur du toggle est évaluée <strong>au moment de l'exécution</strong>, à partir d'un service de configuration central (ici, LaunchDarkly). On peut donc changer le comportement <em>en direct</em>, pour tout le monde ou pour une partie ciblée des utilisateurs.</p>
+
+      <div class="callout">
+        <strong>L'idée clé :</strong> séparer le <strong>déploiement</strong> (le code est en production) de la <strong>mise en exposition</strong> (les utilisateurs voient la fonctionnalité). Ce sont désormais deux décisions distinctes, prises par des personnes potentiellement différentes et à des moments différents.
+      </div>
+
+      <h2>Un essai interactif</h2>
+      <p>Activez l'interrupteur ci-dessous pour voir le comportement basculer&nbsp;:</p>
+      <div class="switch-ligne">
+        <label class="switch">
+          <input type="checkbox" id="demo-toggle" aria-label="Activer la démonstration">
+          <span class="track"></span><span class="thumb"></span>
+        </label>
+        <div class="meta">
+          <strong>nouvelle-page-virements</strong>
+          <small>Démonstration locale — aucun appel réseau</small>
+        </div>
+        <span class="etat-pastille" id="demo-etat">Désactivé</span>
+      </div>
+      <div class="appli-preview" style="max-width:520px">
+        <div class="appli-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>&nbsp;AccèsD — Virements</div>
+        <div class="appli-corps" id="demo-corps">
+          <p class="mb-0"><strong>Page de virements (version actuelle)</strong></p>
+          <p class="muted">Interface existante, éprouvée et stable.</p>
+        </div>
+      </div>
+
+      <h2>Les grands types de toggles</h2>
+      <p>Tous les toggles ne se ressemblent pas. On les classe généralement selon leur <strong>durée de vie</strong> et leur <strong>dynamisme</strong> (à quelle fréquence leur valeur change). Cette distinction, popularisée par Martin Fowler, aide à décider comment les gérer.</p>
+
+      <div class="tabs" id="types-tabs">
+        <div class="tabs-nav">
+          <button class="actif" data-tab="release">Release</button>
+          <button data-tab="exp">Expérimentation</button>
+          <button data-tab="ops">Opérationnel</button>
+          <button data-tab="perm">Permission</button>
+        </div>
+        <div class="tab-panel actif" data-panel="release">
+          <h3>Toggle de livraison (Release)</h3>
+          <p>Permet de déployer du code incomplet ou nouveau de façon <strong>graduelle</strong> (canari, pourcentage, segments) puis de généraliser. <strong>Durée de vie courte&nbsp;:</strong> il doit être retiré une fois la fonctionnalité pleinement déployée et stable.</p>
+          <ul class="coches">
+            <li>Idéal pour le déploiement progressif et le <em>trunk-based development</em>.</li>
+            <li>À retirer rapidement pour éviter la dette de toggle.</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-panel="exp">
+          <h3>Toggle d'expérimentation</h3>
+          <p>Sert à comparer plusieurs variantes (A/B, multivarié) pour mesurer leur impact sur des indicateurs d'affaires. Sa valeur est attribuée de façon cohérente par utilisateur le temps de l'expérience.</p>
+          <ul class="coches"><li>Durée de vie = durée de l'expérience.</li><li>Nécessite des métriques fiables pour conclure.</li></ul>
+        </div>
+        <div class="tab-panel" data-panel="ops">
+          <h3>Toggle opérationnel (Ops)</h3>
+          <p>Contrôle un aspect opérationnel du système&nbsp;: activer/désactiver une intégration coûteuse, dégrader gracieusement une fonctionnalité sous charge. Le fameux <strong>kill switch</strong> en fait partie.</p>
+          <ul class="coches"><li>Certains sont permanents (kill switch de sécurité).</li><li>Pilotés par les équipes d'exploitation / SRE.</li></ul>
+        </div>
+        <div class="tab-panel" data-panel="perm">
+          <h3>Toggle de permission</h3>
+          <p>Expose des fonctionnalités à des catégories d'utilisateurs précises (clients premium, employés, rôles). <strong>Durée de vie longue, voire permanente</strong>, car il porte une règle d'affaires durable.</p>
+          <ul class="coches"><li>À distinguer d'un vrai système de gestion des droits.</li><li>Change rarement de logique, mais reste actif.</li></ul>
+        </div>
+      </div>
+
+      <h2>Ce qu'un toggle n'est pas</h2>
+      <table>
+        <thead><tr><th>Un toggle…</th><th>n'est pas…</th></tr></thead>
+        <tbody>
+          <tr><td>Un interrupteur d'exposition temporaire</td><td>Un système de configuration permanent pour tout</td></tr>
+          <tr><td>Un outil de gestion du risque de déploiement</td><td>Un substitut aux tests automatisés</td></tr>
+          <tr><td>Un moyen de cibler des audiences</td><td>Un système d'autorisation / de sécurité robuste</td></tr>
+          <tr><td>Du code temporaire à retirer</td><td>Une branche `if` à laisser indéfiniment</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout note">
+        <strong>Note :</strong> Cette section doit être complétée avec les informations manquantes au moment de la création du site (conventions internes ExampleCo sur la classification des toggles, exemples concrets, captures d'écran du catalogue).
+      </div>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="pourquoi.html">Suivant : Pourquoi un toggle →</a>
+        <a class="btn btn-fantome" href="glossaire.html">Voir le glossaire</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script>
+    // Démonstration locale du toggle
+    (function () {
+      var t = document.getElementById("demo-toggle");
+      var corps = document.getElementById("demo-corps");
+      var etat = document.getElementById("demo-etat");
+      if (!t) return;
+      t.addEventListener("change", function () {
+        if (t.checked) {
+          etat.textContent = "Activé"; etat.classList.add("actif");
+          corps.innerHTML = '<div class="feature-neuve"><p class="mb-0"><strong>✨ Nouvelle page de virements</strong></p><p class="muted mb-0">Parcours simplifié, confirmation en une étape. Visible uniquement quand le flag est actif.</p></div>';
+        } else {
+          etat.textContent = "Désactivé"; etat.classList.remove("actif");
+          corps.innerHTML = '<p class="mb-0"><strong>Page de virements (version actuelle)</strong></p><p class="muted">Interface existante, éprouvée et stable.</p>';
+        }
+      });
+      // (Les onglets sont gérés de façon générique par site.js)
+    })();
+  </script>
+</body>
+</html>

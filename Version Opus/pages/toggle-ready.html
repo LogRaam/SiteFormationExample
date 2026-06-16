@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Être « Toggle Ready » — Bonnes pratiques & gating · Formation ExampleCo</title>
+  <meta name="description" content="Les bonnes pratiques de développement pour être Toggle Ready : nommage, gating, valeur par défaut, tests, retrait.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body data-page="toggle-ready">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Toggle Ready</nav>
+      <span class="tag dev">Référence · Bonnes pratiques</span>
+      <h1>Être « Toggle Ready »</h1>
+      <p class="lede">Être « Toggle Ready », c'est intégrer le toggle proprement dans son flux de développement&nbsp;: de la convention de nommage au retrait planifié, en passant par le <strong>gating</strong> et les tests des deux états.</p>
+
+      <h2>La liste de vérification</h2>
+      <p>Avant de fusionner du code derrière un flag, passez cette liste&nbsp;:</p>
+      <div class="card" id="checklist">
+        <ul class="coches" style="margin:0">
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Clé de flag claire, en kebab-case, préfixée par domaine</label></li>
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Type de toggle identifié (release, ops, expérimentation, permission)</label></li>
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Propriétaire et date de retrait visée renseignés</label></li>
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Valeur par défaut = comportement existant et sûr</label></li>
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Évaluation centralisée derrière une abstraction</label></li>
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Tests automatisés pour l'état ON et l'état OFF</label></li>
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Pas de dépendance cachée entre toggles (combinatoire maîtrisée)</label></li>
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Plan d'observation (métriques, journaux) pour le rollout</label></li>
+          <li><label style="cursor:pointer"><input type="checkbox" data-check> Inscription au catalogue central + conformité du type de switch</label></li>
+        </ul>
+        <div class="barre mt-2"><span id="check-barre"></span></div>
+        <p id="check-txt" class="muted mb-0">0 / 9 — commencez la vérification.</p>
+      </div>
+
+      <h2>Gating : où placer le point de décision&nbsp;?</h2>
+      <p>Le <strong>gating</strong> est l'endroit du code où l'on évalue le flag pour bifurquer. Bien placé, il garde le code lisible et testable.</p>
+      <div class="grid grid-2">
+        <div class="card"><h3>✅ Au plus haut niveau utile</h3><p class="muted">Décidez tôt (ex. au point d'entrée d'un parcours) et passez le résultat, plutôt que de re-tester le flag partout.</p></div>
+        <div class="card"><h3>✅ Un seul point de vérité</h3><p class="muted">Une fonction <code>fonctionnaliteActive()</code> unique par flag, mockable en test.</p></div>
+        <div class="card"><h3>❌ Évaluations dispersées</h3><p class="muted">Tester le même flag à dix endroits multiplie les risques d'incohérence.</p></div>
+        <div class="card"><h3>❌ Imbrication profonde</h3><p class="muted">Des <code>if</code> de flags imbriqués rendent les états ingérables.</p></div>
+      </div>
+
+      <h2>Nommage : un exemple de convention</h2>
+      <pre><code>&lt;domaine&gt;-&lt;fonctionnalité&gt;[-&lt;variante&gt;]
+
+✔ virements-nouvelle-page
+✔ paiements-3ds-experimentation
+✔ ops-integration-partenaire-x-killswitch
+✘ test1            (non descriptif)
+✘ NouvellePage     (casse incohérente)
+✘ flagTemp         (sans domaine ni intention)</code></pre>
+      <div class="placeholder">
+        <strong>Note :</strong> Cette section doit être complétée avec la convention de nommage officielle de ExampleCo et les règles du catalogue central (préfixes par équipe, métadonnées obligatoires).
+      </div>
+
+      <h2>Tester les deux états</h2>
+      <pre><code>describe('page de virements', () => {
+  it('affiche la nouvelle page quand le flag est ON', () => {
+    const rendu = render({ flag: { 'virements-nouvelle-page': true } });
+    expect(rendu).toContain('Nouvelle page');
+  });
+
+  it('affiche la page actuelle quand le flag est OFF', () => {
+    const rendu = render({ flag: { 'virements-nouvelle-page': false } });
+    expect(rendu).toContain('Page actuelle');
+  });
+});</code></pre>
+
+      <h2>Anti-patrons fréquents</h2>
+      <details class="accordeon"><summary>Le flag « pour toujours »</summary><div class="corps">Un release toggle qu'on ne retire jamais devient de la dette. Fixez une date de retrait et tenez-la.</div></details>
+      <details class="accordeon"><summary>Le flag comme contrôle d'accès</summary><div class="corps">Un toggle n'est pas un système d'autorisation sécurisé&nbsp;; ne l'utilisez pas pour protéger des données sensibles.</div></details>
+      <details class="accordeon"><summary>Les flags couplés implicitement</summary><div class="corps">Deux flags qui doivent toujours être cohérents entre eux sont un piège. Documentez ou fusionnez la logique.</div></details>
+      <details class="accordeon"><summary>Le chemin OFF non testé</summary><div class="corps">Si seul l'état ON est testé, désactiver le flag en production devient un saut dans l'inconnu.</div></details>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="parcours-dev.html">Aller au parcours Développeurs →</a>
+        <a class="btn btn-fantome" href="cycle-de-vie.html">← Cycle de vie</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script>
+    (function () {
+      var bloc = document.getElementById("checklist");
+      if (!bloc) return;
+      var barre = document.getElementById("check-barre");
+      var txt = document.getElementById("check-txt");
+      var total = bloc.querySelectorAll("[data-check]").length;
+      bloc.addEventListener("change", function () {
+        var n = bloc.querySelectorAll("[data-check]:checked").length;
+        barre.style.width = Math.round(n / total * 100) + "%";
+        txt.textContent = n + " / " + total + (n === total ? " — prêt à fusionner. ✔" : " — éléments vérifiés.");
+      });
+    })();
+  </script>
+</body>
+</html>
