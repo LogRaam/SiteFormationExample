@@ -164,5 +164,66 @@ window.FF_QUIZ = {
         explication: "Le catalogue central offre une vue unique pour gouverner les switches : type, propriétaire, statut, conformité."
       }
     ]
+  },
+
+  "go-toggle-1": {
+    titre: "Parcours Go Toggle",
+    questions: [
+      {
+        q: "Quel est le prérequis obligatoire pour obtenir l'accès à LaunchDarkly chez ExampleCo ?",
+        options: [
+          "Avoir créé au moins un flag",
+          "Compléter la formation CTI-4120",
+          "Être Product Owner",
+          "Avoir approuvé une Pull Request"
+        ],
+        bonne: 1,
+        explication: "La formation CTI-4120 est obligatoire pour obtenir l'accès à LaunchDarkly : c'est la porte d'entrée du parcours Go Toggle."
+      },
+      {
+        q: "Sur quoi repose le ciblage d'un flag ?",
+        options: [
+          "Uniquement sur le numéro de version de l'application",
+          "Sur les règles de ciblage (target rules), les segments et les contextes",
+          "Sur la taille du fichier déployé",
+          "Sur l'ordre alphabétique des membres"
+        ],
+        bonne: 1,
+        explication: "Le ciblage combine le contexte (attributs de l'entité évaluée), les segments (groupes réutilisables) et les règles de ciblage qui décident quelle variation servir."
+      },
+      {
+        q: "À quoi servent les environnements (ex. Test, Production) dans LaunchDarkly ?",
+        options: [
+          "À stocker le code source",
+          "À donner au même flag des valeurs, règles et clés SDK distinctes selon l'environnement",
+          "À remplacer les segments",
+          "À supprimer automatiquement les flags obsolètes"
+        ],
+        bonne: 1,
+        explication: "Chaque environnement possède sa propre clé SDK et ses propres valeurs/règles : un flag peut être « on » en Test et « off » en Production."
+      },
+      {
+        q: "Au moment de la mise en production, dans quel état déploie-t-on le flag ?",
+        options: [
+          "Activé à 100 % pour tous",
+          "« Off » — le code part en production sans être exposé (déployer ≠ exposer)",
+          "Supprimé",
+          "Peu importe, la MEP l'active automatiquement"
+        ],
+        bonne: 1,
+        explication: "On déploie le code « éteint », sur sa valeur par défaut sûre. L'exposition est ensuite pilotée séparément, sans nouvelle MEP."
+      },
+      {
+        q: "Parmi les capsules optionnelles, laquelle n'est pas attendue avant 2027 ?",
+        options: [
+          "Le test A/B",
+          "L'activation progressive",
+          "Le kill switch",
+          "Le guarded rollout"
+        ],
+        bonne: 3,
+        explication: "Le guarded rollout (déploiement progressif automatisé et encadré par des garde-fous) n'est pas attendu avant 2027 chez ExampleCo."
+      }
+    ]
   }
 };

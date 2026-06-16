@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parcours Go Toggle — Formation LaunchDarkly · ExampleCo</title>
+  <meta name="description" content="Parcours de formation Go Toggle : prérequis CTI-4120, aiguillage par rôle, variations et environnements, ciblage/segments/contextes, mise en production, monitoring et cycle de vie, capsules optionnelles.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2300874e'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>FF</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .module.non-requis { opacity: .55; }
+    .role-note { display: none; font-size: .8rem; font-weight: 700; color: #9a6a05; background: var(--accent-100); padding: .2rem .6rem; border-radius: 999px; margin-left: .5rem; }
+    .module.non-requis .role-note { display: inline-block; }
+    .capsule-temps { font-size: .78rem; font-weight: 800; color: var(--vert-700); background: var(--vert-100); padding: .15rem .55rem; border-radius: 999px; }
+    /* Cibles de navigation depuis le diagramme : éviter le masquage sous l'en-tête collant */
+    .module, #role-section, #evaluation { scroll-margin-top: 84px; }
+    /* Cases du diagramme cliquables */
+    .flux .noeud[data-aller] { cursor: pointer; }
+    .flux .noeud[data-aller]:hover,
+    .flux .noeud[data-aller]:focus-visible { border-color: var(--vert-500); box-shadow: var(--ombre-2); outline: none; transform: translateY(-2px); }
+    .flux .noeud[data-aller] .aller-ic { display: block; font-size: .7rem; color: var(--vert-700); margin-top: .2rem; font-weight: 700; }
+  </style>
+</head>
+<body data-page="parcours-go-toggle">
+  <div id="site-header"></div>
+
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="fil"><a href="../index.html">Accueil</a> › Formation › Go Toggle</nav>
+      <span class="tag dev">Parcours · Go Toggle</span>
+      <h1>Parcours Go Toggle</h1>
+      <p class="lede">Le parcours de formation complet pour utiliser les Feature Flags avec LaunchDarkly chez ExampleCo. De la formation d'accès obligatoire jusqu'au monitoring et au cycle de vie des flags, en passant par le ciblage et la mise en production. Cochez chaque étape pour suivre votre progression (mémorisée sur cet appareil).</p>
+
+      <div class="callout">
+        <strong>Style de formation :</strong> interactif, à base d'exercices courts et auto-dirigés, pour forger les réflexes et les bonnes pratiques.
+      </div>
+
+      <!-- Diagramme du parcours (cases cliquables) -->
+      <div class="flux" style="margin:1.4rem 0 .4rem">
+        <div class="noeud" data-aller="g0" role="link" tabindex="0"><span class="ic">🎓</span>Prérequis<br><small>CTI-4120</small><span class="aller-ic">ouvrir →</span></div>
+        <div class="fleche">→</div>
+        <div class="noeud" data-aller="role" role="link" tabindex="0"><span class="ic">🔀</span>Votre rôle&nbsp;?<span class="aller-ic">choisir →</span></div>
+        <div class="fleche">→</div>
+        <div class="noeud" data-aller="g1" role="link" tabindex="0"><span class="ic">🎚️</span>Variations &amp; environnements<br><small>Développeurs</small><span class="aller-ic">ouvrir →</span></div>
+        <div class="fleche">→</div>
+        <div class="noeud" data-aller="g2" role="link" tabindex="0"><span class="ic">🎯</span>Ciblage, segments, contextes<span class="aller-ic">ouvrir →</span></div>
+        <div class="fleche">→</div>
+        <div class="noeud" data-aller="g3" role="link" tabindex="0"><span class="ic">🚀</span>Mise en production<span class="aller-ic">ouvrir →</span></div>
+        <div class="fleche">→</div>
+        <div class="noeud" data-aller="g4" role="link" tabindex="0"><span class="ic">📈</span>Monitoring &amp; cycle de vie<span class="aller-ic">ouvrir →</span></div>
+        <div class="fleche">→</div>
+        <div class="noeud" data-aller="fin" role="link" tabindex="0"><span class="ic">🏁</span>Fin<span class="aller-ic">évaluation →</span></div>
+      </div>
+      <p class="muted" style="font-size:.85rem">💡 <strong>Cliquez sur une case</strong> du diagramme pour ouvrir l'étape correspondante. Les <strong>Utilisateurs / Product Owners</strong> rejoignent le parcours à l'étape « Ciblage ». Des <strong>capsules optionnelles</strong> approfondissent la mise en production.</p>
+
+      <!-- Aiguillage par rôle -->
+      <div class="parcours-tete" id="role-section" style="display:block">
+        <strong>Quel est votre rôle&nbsp;?</strong>
+        <div class="segments" style="margin:.6rem 0">
+          <button data-role-sel="dev" class="actif">👩‍💻 Développeur</button>
+          <button data-role-sel="user">🧭 Utilisateur / PO</button>
+        </div>
+        <p class="muted mb-0" id="role-explication" style="font-size:.9rem"></p>
+      </div>
+
+      <div class="parcours-tete">
+        <div style="flex:1;min-width:200px">
+          <strong id="p-pct">0 %</strong> complété
+          <div class="barre" style="margin:.5rem 0 0"><span id="p-barre"></span></div>
+        </div>
+        <span class="quiz-progress" id="p-compte">0 / 5 étapes</span>
+        <button class="btn btn-fantome" id="p-reset">↻ Réinitialiser</button>
+      </div>
+
+      <ul class="module-liste" id="modules">
+
+        <li class="module" data-mod="g0" data-role="both">
+          <div class="module-tete">
+            <span class="num"><span>0</span></span>
+            <span class="module-titre"><strong>Prérequis — Formation CTI-4120</strong><small>Obligatoire · ~15 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>La formation <strong>CTI-4120</strong> est <strong>obligatoire pour obtenir l'accès à LaunchDarkly</strong> chez ExampleCo. Elle constitue la porte d'entrée du parcours Go Toggle&nbsp;: sans elle, pas d'accès à l'outil.</p>
+            <ul class="coches">
+              <li>À compléter <strong>avant</strong> toute manipulation dans LaunchDarkly.</li>
+              <li>Conditionne l'octroi des accès (voir aussi les permissions d'équipe).</li>
+            </ul>
+            <div class="placeholder">
+              <strong>Note :</strong> Cette étape doit être complétée avec les informations manquantes au moment de la création du site (contenu exact de CTI-4120, lien d'inscription, durée officielle, modalités d'obtention de l'accès, responsable).
+            </div>
+          </div>
+        </li>
+
+        <li class="module" data-mod="g1" data-role="dev">
+          <div class="module-tete">
+            <span class="num"><span>1</span></span>
+            <span class="module-titre"><strong>Variations et environnements</strong> <span class="role-note">Optionnel pour votre rôle</span><small>Développeurs · ~15 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>Un flag possède des <strong>variations</strong> (les valeurs possibles) et une valeur potentiellement différente <strong>par environnement</strong>.</p>
+            <h4 class="mt-0">Variations</h4>
+            <ul class="coches">
+              <li><strong>Booléen</strong> : ON / OFF — le cas le plus courant (release simple).</li>
+              <li><strong>Multivarié</strong> : chaîne, nombre ou JSON — pour plusieurs variantes (ex. A/B).</li>
+            </ul>
+            <h4>Environnements</h4>
+            <ul class="coches">
+              <li>Un projet contient plusieurs environnements (ex. <em>Test</em>, <em>Production</em>).</li>
+              <li>Chaque environnement a sa propre <strong>clé SDK</strong> et ses propres valeurs/règles de flag.</li>
+              <li>Un même flag peut être « on » en Test et « off » en Production.</li>
+            </ul>
+            <div class="callout">
+              <strong>Rappel d'accès :</strong> la création des projets/environnements et l'attribution des accès sont des étapes d'administration, encadrées par les permissions d'équipe (et le prérequis CTI-4120).
+            </div>
+            <div class="placeholder">
+              <strong>Note :</strong> Cette étape doit être complétée avec les informations manquantes au moment de la création du site (captures réelles des écrans Variations / Environnements, convention de nommage et liste des environnements ExampleCo, gestion des clés SDK).
+            </div>
+            <p class="mb-0">📎 Voir aussi&nbsp;: <a href="operationnaliser.html">Mise en œuvre</a> · <a href="concepts.html">Concepts (types de variations)</a></p>
+          </div>
+        </li>
+
+        <li class="module" data-mod="g2" data-role="both">
+          <div class="module-tete">
+            <span class="num"><span>2</span></span>
+            <span class="module-titre"><strong>Ciblage : target rules, segments et contextes</strong><small>Tous les rôles · ~20 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>Le cœur du pilotage fin&nbsp;: décider <strong>qui</strong> voit <strong>quelle</strong> variation, et dans quel ordre les règles s'appliquent.</p>
+            <h4 class="mt-0">Contexte (context)</h4>
+            <p>L'ensemble des <strong>attributs</strong> décrivant l'entité qui évalue le flag (un membre, un appareil, une organisation…). Ex. <code>{ kind: "user", key: membre.id, segment: "beta", region: "QC" }</code>. C'est sur ces attributs que reposent les règles.</p>
+            <h4>Segments</h4>
+            <p>Des <strong>groupes réutilisables</strong> définis par des critères (ex. <em>bêta-testeurs</em>, <em>employés internes</em>, <em>région</em>). On cible un segment plutôt que de répéter les mêmes conditions partout.</p>
+            <h4>Règles de ciblage (target rules)</h4>
+            <ul class="coches">
+              <li>« Si <em>attribut</em> correspond à <em>X</em> → servir la variation <em>Y</em> ».</li>
+              <li>Possibilité d'un <strong>rollout en pourcentage</strong> à l'intérieur d'une règle (déploiement progressif).</li>
+              <li>Les règles sont évaluées <strong>dans l'ordre</strong>&nbsp;; sinon la <strong>règle par défaut</strong> s'applique.</li>
+            </ul>
+            <p><strong>Exemple ExampleCo :</strong> servir la nouvelle page aux membres du segment « interne », puis à 10 % du segment « tous » de la région du Québec, le reste recevant l'ancienne page.</p>
+            <div class="placeholder">
+              <strong>Note :</strong> Cette étape doit être complétée avec les informations manquantes au moment de la création du site (captures des écrans Targeting / Segments / Contexts, segments standard ExampleCo, attributs de contexte disponibles, bonnes pratiques internes).
+            </div>
+            <p class="mb-0">🧪 À pratiquer&nbsp;: <a href="sandbox.html">le bac à sable (ciblage d'audience)</a> · 📎 <a href="glossaire.html">Glossaire (segment, contexte, bucketing)</a></p>
+          </div>
+        </li>
+
+        <li class="module" data-mod="g3" data-role="both">
+          <div class="module-tete">
+            <span class="num"><span>3</span></span>
+            <span class="module-titre"><strong>Mise en production</strong><small>Tous les rôles · ~15 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <p>On déploie le code en production avec le flag <strong>désactivé</strong>. La fonctionnalité est livrée mais invisible&nbsp;: <strong>déployer ≠ exposer</strong>. L'exposition se pilotera ensuite depuis LaunchDarkly, sans nouvelle MEP.</p>
+            <ul class="coches">
+              <li>Vérifier qu'à valeur « off », l'application se comporte exactement comme avant (valeur par défaut sûre).</li>
+              <li>Confirmer la configuration de la clé SDK de Production.</li>
+              <li>Anticiper le processus <strong>SOC2</strong>&nbsp;: chaque modification de flag créera une PR à faire approuver par un pair.</li>
+            </ul>
+            <div class="placeholder">
+              <strong>Note :</strong> Cette étape doit être complétée avec les informations manquantes au moment de la création du site (processus de MEP ExampleCo, vérifications attendues, environnements intermédiaires, rôles).
+            </div>
+            <p class="mb-0">📎 Voir aussi&nbsp;: <a href="pourquoi.html#deployer-vs-exposer">Déployer ≠ Exposer</a> · <a href="exampleco.html#soc2">Processus SOC2</a></p>
+          </div>
+        </li>
+
+        <li class="module" data-mod="g4" data-role="both">
+          <div class="module-tete">
+            <span class="num"><span>4</span></span>
+            <span class="module-titre"><strong>Monitoring et cycle de vie des flags</strong><small>Tous les rôles · ~15 min</small></span>
+            <label class="switch"><input type="checkbox" data-fait><span class="track"></span><span class="thumb"></span></label>
+          </div>
+          <div class="module-corps">
+            <h4 class="mt-0">Monitoring</h4>
+            <p>Pendant et après l'activation, on <strong>surveille</strong>&nbsp;: taux d'erreur, performance, et métriques d'affaires. Le monitoring permet de décider d'augmenter l'exposition, de la maintenir ou de revenir en arrière (kill switch).</p>
+            <ul class="coches">
+              <li>Définir les indicateurs à surveiller <em>avant</em> d'augmenter l'exposition.</li>
+              <li>Relier l'exposition d'un flag à ses effets observés.</li>
+            </ul>
+            <h4>Cycle de vie</h4>
+            <p>Un flag naît, sert un objectif, puis <strong>doit être retiré</strong>. Surveiller le cycle de vie évite la <strong>dette de toggle</strong> (flags obsolètes jamais nettoyés).</p>
+            <div class="placeholder">
+              <strong>Note :</strong> Cette étape doit être complétée avec les informations manquantes au moment de la création du site (outils de monitoring ExampleCo, métriques standard surveillées, tableau de bord, processus de revue des stale flags).
+            </div>
+            <p class="mb-0">📎 Voir aussi&nbsp;: <a href="cycle-de-vie.html">Cycle de vie &amp; retrait</a></p>
+          </div>
+        </li>
+      </ul>
+
+      <div id="p-bravo" class="callout succes" style="display:none">
+        <strong>🏁 Parcours Go Toggle complété&nbsp;!</strong> Vous avez parcouru toutes les étapes requises pour votre rôle. Pensez aux capsules optionnelles ci-dessous et à l'évaluation finale.
+      </div>
+
+      <!-- Capsules optionnelles -->
+      <h2>Capsules optionnelles</h2>
+      <p class="lede">Approfondissements courts (≈ 5 min chacun) pour aller plus loin sur la mise en production.</p>
+
+      <details class="accordeon">
+        <summary>🧪 Test A/B <span class="capsule-temps">+5 min</span></summary>
+        <div class="corps">
+          <p>Comparer plusieurs <strong>variantes</strong> sur une fraction des utilisateurs et mesurer leur impact sur un indicateur d'affaires avant de généraliser la meilleure.</p>
+          <ul class="coches"><li>Définir l'indicateur de succès <em>avant</em> de lancer.</li><li>Affecter une variante stable par utilisateur.</li><li>Retirer le flag d'expérimentation une fois la décision prise.</li></ul>
+          <p class="mb-0">📎 <a href="pourquoi.html#apprendre-experimenter">Apprendre / expérimenter</a> · <a href="concepts.html">Concepts (toggle d'expérimentation)</a></p>
+        </div>
+      </details>
+
+      <details class="accordeon">
+        <summary>📈 Activation progressive <span class="capsule-temps">+5 min</span></summary>
+        <div class="corps">
+          <p>Augmenter l'exposition <strong>par paliers</strong> (interne → bêta → 1 % → 10 % → 50 % → 100 %) en surveillant les indicateurs, prêt à revenir en arrière.</p>
+          <p class="mb-0">🧪 À pratiquer&nbsp;: <a href="sandbox.html">le bac à sable (rollout progressif)</a></p>
+        </div>
+      </details>
+
+      <details class="accordeon">
+        <summary>🛑 Kill switch <span class="capsule-temps">+5 min</span></summary>
+        <div class="corps">
+          <p>Couper instantanément une fonctionnalité problématique <strong>sans redéploiement</strong>, pour maîtriser un incident.</p>
+          <ul class="coches"><li>Prévoir le kill switch dès la conception d'une intégration à risque.</li><li>Vérifier que la coupure laisse l'application dans un état stable.</li></ul>
+          <p class="mb-0">🧪 À pratiquer&nbsp;: <a href="sandbox.html">le bac à sable (kill switch)</a> · 📎 <a href="pourquoi.html#pouvoir-tout-couper">Pouvoir tout couper</a></p>
+        </div>
+      </details>
+
+      <details class="accordeon">
+        <summary>🛡️ Guarded rollout <span class="capsule-temps" style="background:var(--accent-100);color:#9a6a05">À venir · pas avant 2027</span></summary>
+        <div class="corps">
+          <p>Le <strong>guarded rollout</strong> automatise le déploiement progressif en l'<strong>encadrant par des garde-fous</strong>&nbsp;: les métriques sont surveillées automatiquement et le rollout est suspendu ou annulé si un seuil est franchi.</p>
+          <div class="placeholder">
+            <strong>Note :</strong> Fonctionnalité <strong>non attendue avant 2027</strong> chez ExampleCo. Section à compléter le moment venu (disponibilité, métriques de garde, procédure interne).
+          </div>
+        </div>
+      </details>
+
+      <h2 id="evaluation">Évaluation finale</h2>
+      <div class="quiz" data-quiz="go-toggle-1"></div>
+
+      <div class="callout note">
+        <strong>Note :</strong> Ce parcours doit être complété avec les informations manquantes au moment de la création du site (captures d'écran réelles de LaunchDarkly, contenu de CTI-4120, conventions et outillage internes ExampleCo, outils de monitoring, liens vers la documentation interne et le catalogue).
+      </div>
+
+      <div class="pill-row mt-2">
+        <a class="btn btn-primaire" href="parcours-dev.html">Approfondir côté technique →</a>
+        <a class="btn btn-fantome" href="parcours-metier.html">Parcours Métier / PO</a>
+        <a class="btn btn-fantome" href="sandbox.html">Bac à sable</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/data/quiz-data.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script>
+    // Contrôleur du parcours Go Toggle : progression sensible au rôle.
+    (function () {
+      var PARCOURS = "go-toggle";
+      var ROLE_CLE = "ff-gotoggle-role";
+      var modules = Array.prototype.slice.call(document.querySelectorAll("#modules .module"));
+      if (!modules.length || !window.FF) return;
+
+      var barre = document.getElementById("p-barre");
+      var pct = document.getElementById("p-pct");
+      var compte = document.getElementById("p-compte");
+      var bravo = document.getElementById("p-bravo");
+      var reset = document.getElementById("p-reset");
+      var roleExpl = document.getElementById("role-explication");
+
+      var etat = FF.progres.lire(PARCOURS);
+      var role = "dev";
+      try { role = localStorage.getItem(ROLE_CLE) || "dev"; } catch (e) {}
+
+      var EXPL = {
+        dev: "Parcours complet : variations &amp; environnements, ciblage, mise en production, monitoring et cycle de vie.",
+        user: "Parcours allégé : vous démarrez au ciblage. L'étape « Variations &amp; environnements » (technique) devient optionnelle."
+      };
+
+      function applicable(m) {
+        var r = m.getAttribute("data-role");
+        return r === "both" || r === role;
+      }
+
+      function maj() {
+        var faits = 0, total = 0;
+        modules.forEach(function (m) {
+          var id = m.getAttribute("data-mod");
+          var coche = m.querySelector("[data-fait]");
+          var fait = !!etat[id];
+          coche.checked = fait;
+          m.classList.toggle("fait", fait);
+          var ok = applicable(m);
+          m.classList.toggle("non-requis", !ok);
+          if (ok) { total++; if (fait) faits++; }
+        });
+        var p = total ? Math.round(faits / total * 100) : 0;
+        if (barre) barre.style.width = p + "%";
+        if (pct) pct.textContent = p + " %";
+        if (compte) compte.textContent = faits + " / " + total + " étapes";
+        if (bravo) bravo.style.display = (total && faits === total) ? "block" : "none";
+      }
+
+      function appliquerRole(r) {
+        role = r;
+        try { localStorage.setItem(ROLE_CLE, r); } catch (e) {}
+        document.querySelectorAll("[data-role-sel]").forEach(function (b) {
+          b.classList.toggle("actif", b.getAttribute("data-role-sel") === r);
+        });
+        if (roleExpl) roleExpl.innerHTML = EXPL[r] || "";
+        maj();
+      }
+
+      // Repli / dépli + cases à cocher (même comportement que les autres parcours)
+      modules.forEach(function (m) {
+        var id = m.getAttribute("data-mod");
+        var tete = m.querySelector(".module-tete");
+        var corps = m.querySelector(".module-corps");
+        var coche = m.querySelector("[data-fait]");
+        corps.style.display = "none";
+        tete.style.cursor = "pointer";
+        tete.addEventListener("click", function (e) {
+          if (e.target.closest(".switch")) return;
+          corps.style.display = corps.style.display === "none" ? "block" : "none";
+        });
+        coche.addEventListener("change", function () {
+          etat = FF.progres.marquer(PARCOURS, id, coche.checked);
+          maj();
+          if (coche.checked) { corps.style.display = "none"; FF.toast && FF.toast("Étape validée ✔"); }
+        });
+      });
+
+      document.querySelectorAll("[data-role-sel]").forEach(function (b) {
+        b.addEventListener("click", function () { appliquerRole(b.getAttribute("data-role-sel")); });
+      });
+
+      // Navigation depuis les cases du diagramme : défile vers l'étape et l'ouvre.
+      function allerVers(cible) {
+        var el;
+        if (cible === "role") el = document.getElementById("role-section");
+        else if (cible === "fin") el = document.getElementById("evaluation");
+        else {
+          el = document.querySelector('.module[data-mod="' + cible + '"]');
+          if (el) {
+            var corps = el.querySelector(".module-corps");
+            if (corps) corps.style.display = "block";
+          }
+        }
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      document.querySelectorAll("[data-aller]").forEach(function (n) {
+        n.addEventListener("click", function () { allerVers(n.getAttribute("data-aller")); });
+        n.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); allerVers(n.getAttribute("data-aller")); }
+        });
+      });
+
+      if (reset) reset.addEventListener("click", function () {
+        FF.progres.reinitialiser(PARCOURS);
+        etat = {};
+        modules.forEach(function (m) { m.querySelector(".module-corps").style.display = "none"; });
+        maj();
+        FF.toast && FF.toast("Progression réinitialisée");
+      });
+
+      appliquerRole(role);
+    })();
+  </script>
+</body>
+</html>

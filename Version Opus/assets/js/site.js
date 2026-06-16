@@ -20,6 +20,7 @@
     { href: "pages/exampleco.html", label: "Chez ExampleCo" },
     {
       label: "Formation", menu: [
+        { href: "pages/parcours-go-toggle.html", label: "Parcours Go Toggle", desc: "Parcours complet : CTI-4120 → rôle → ciblage → MEP → monitoring" },
         { href: "pages/parcours-dev.html", label: "Parcours Développeurs", desc: "Mettre en place un toggle techniquement" },
         { href: "pages/parcours-metier.html", label: "Parcours Métier / PO", desc: "Activer et piloter un toggle en toute sécurité" },
         { href: "pages/toggle-ready.html", label: "Être « Toggle Ready »", desc: "Bonnes pratiques & gating" },
@@ -82,6 +83,7 @@
           '<li><a href="' + base + 'pages/cycle-de-vie.html">Cycle de vie</a></li>' +
         '</ul></div>' +
         '<div><h4>Se former</h4><ul>' +
+          '<li><a href="' + base + 'pages/parcours-go-toggle.html">Parcours Go Toggle</a></li>' +
           '<li><a href="' + base + 'pages/parcours-dev.html">Parcours Développeurs</a></li>' +
           '<li><a href="' + base + 'pages/parcours-metier.html">Parcours Métier / PO</a></li>' +
           '<li><a href="' + base + 'pages/toggle-ready.html">Toggle Ready</a></li>' +
