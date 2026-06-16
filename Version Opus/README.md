@@ -31,7 +31,7 @@ Aucune dépendance, aucune étape de build. Deux options :
 │   ├── operationnaliser.html   Code source & création dans LaunchDarkly
 │   ├── cycle-de-vie.html       Gestion & cycle de vie (+ mini-audit)
 │   ├── toggle-ready.html       Bonnes pratiques, gating (+ checklist)
-│   ├── desjardins.html         SOC2, catalogue central, 3 types de switches (+ quiz)
+│   ├── ExampleCo.html         SOC2, catalogue central, 3 types de switches (+ quiz)
 │   ├── parcours-dev.html       Parcours formation Développeurs (interactif)
 │   ├── parcours-metier.html    Parcours formation Métier / PO (interactif)
 │   ├── sandbox.html            Simulateur de déploiement progressif + kill switch

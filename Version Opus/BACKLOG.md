@@ -12,7 +12,7 @@ Chaque point correspond à un encadré « Note » ou un placeholder présent dan
 | `operationnaliser.html` | Captures réelles de la console LaunchDarkly, conventions de nommage internes, gabarit de fiche du catalogue |
 | `cycle-de-vie.html` | Processus interne de revue des *stale flags* (fréquence, outillage, indicateurs) |
 | `toggle-ready.html` | Convention de nommage officielle, métadonnées obligatoires du catalogue |
-| `desjardins.html` | Outil de PR utilisé, délais/rôles d'approbation, accès et champs du catalogue, critères de classification des 3 types, nom du système sur mesure, SLA |
+| `ExampleCo.html` | Outil de PR utilisé, délais/rôles d'approbation, accès et champs du catalogue, critères de classification des 3 types, nom du système sur mesure, SLA |
 | `parcours-dev.html` | Exemples de code internes, captures LaunchDarkly, liens documentation interne |
 | `parcours-metier.html` | Exemples concrets, captures d'écran, procédure interne d'activation, contacts/rôles |
 | `sandbox.html` | Segments réels, métriques surveillées, intégration au catalogue |

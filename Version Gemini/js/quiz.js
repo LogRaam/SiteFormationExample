@@ -8,7 +8,7 @@ const questions = [
         ]
     },
     {
-        q: "Où doit-on répertorier tout nouveau Feature Flag chez Desjardins ?",
+        q: "Où doit-on répertorier tout nouveau Feature Flag chez ExampleCo ?",
         options: [
             { text: "Dans un fichier Excel partagé", correct: false },
             { text: "Dans le Catalogue Central de Toggles", correct: true },
@@ -92,7 +92,7 @@ function showFinalScore() {
     
     quizContent.innerHTML = `<h3>Quiz terminé !</h3>`;
     resultDiv.textContent = `Votre score : ${score} / ${questions.length}`;
-    resultDiv.style.color = "var(--desjardins-blue)";
+    resultDiv.style.color = "var(--ExampleCo-blue)";
     nextBtn.style.display = 'none';
     
     const restartBtn = document.createElement('button');

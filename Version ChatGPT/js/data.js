@@ -1,6 +1,6 @@
 window.LAUNCHDARKLY_TRAINING_DATA = {
   placeholder:
-    "Note : Cette section doit être complétée avec les informations manquantes au moment de la création du site (contenu détaillé, captures d'écran, exemples concrets Desjardins, etc.).",
+    "Note : Cette section doit être complétée avec les informations manquantes au moment de la création du site (contenu détaillé, captures d'écran, exemples concrets ExampleCo, etc.).",
   reference: [
     {
       title: "Pourquoi utiliser un Feature Toggle",
@@ -109,7 +109,7 @@ window.LAUNCHDARKLY_TRAINING_DATA = {
   ],
   readiness: [
     "La justification métier ou de risque est écrite et comprise.",
-    "Le type de switch est classé selon les règles Desjardins.",
+    "Le type de switch est classé selon les règles ExampleCo.",
     "Le propriétaire, l'échéance de revue et le plan de retrait sont définis.",
     "Le comportement par défaut est prudent en cas d'erreur LaunchDarkly.",
     "Les tests couvrent les états activé et désactivé.",
@@ -176,7 +176,7 @@ window.LAUNCHDARKLY_TRAINING_DATA = {
           title: "Préparer les contrôles de livraison",
           summary: "Documenter PR, surveillance et retour arrière.",
           content:
-            "Chez Desjardins, la modification d'un flag entraîne une PR automatique qui doit être approuvée par une autre personne. Le développeur prépare les preuves et les observations nécessaires.",
+            "Chez ExampleCo, la modification d'un flag entraîne une PR automatique qui doit être approuvée par une autre personne. Le développeur prépare les preuves et les observations nécessaires.",
           bullets: [
             "Lier le flag au catalogue central et aux artefacts de changement.",
             "Définir les métriques de santé, d'erreur et d'adoption.",

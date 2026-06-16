@@ -9,7 +9,7 @@
   - Développeurs : qualification, implantation, contrôles de livraison.
   - Product Owners et métiers : décision, activation, fermeture du cycle.
 - Quiz interactifs, progression locale et simulation de risque.
-- Spécificités Desjardins intégrées :
+- Spécificités ExampleCo intégrées :
   - PR automatique à chaque modification de flag.
   - Approbation par une autre personne que le développeur.
   - Catalogue central de toggle switches.
@@ -24,7 +24,7 @@
 - Nomenclature officielle des flags et champs obligatoires du catalogue central.
 - Détail exact du workflow ServiceNow pour les changements standards.
 - Procédure complète du système sur mesure pour les livraisons progressives.
-- Exemples Desjardins validés par Architecture, Sécurité, Conformité ou Gestion du changement.
+- Exemples ExampleCo validés par Architecture, Sécurité, Conformité ou Gestion du changement.
 - Règles de conservation des preuves et liens vers les référentiels internes.
 
 ## Améliorations possibles

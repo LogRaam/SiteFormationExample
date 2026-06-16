@@ -1,4 +1,4 @@
-**Goal :** Créer un site web de référence et de formation interactif sur l’utilisation des Feature Flags avec LaunchDarkly chez Desjardins.
+**Goal :** Créer un site web de référence et de formation interactif sur l’utilisation des Feature Flags avec LaunchDarkly chez ExampleCo.
 
 **Stratégie de modèles (Cost Optimization) :**
 - **Planification, architecture, réflexion globale et contenu pédagogique** → **gpt-5.5 (current)**
@@ -24,7 +24,7 @@ Développer un site complet qui sert à la fois de **référence documentaire** 
   - a) Développeurs (mise en place technique du feature toggle)
   - b) Utilisateurs métier / Product Owners (activation / désactivation des toggles)
 
-**Spécificités Desjardins à intégrer :**
+**Spécificités ExampleCo à intégrer :**
 - SOC2 : Une Pull Request est automatiquement créée à chaque modification de flag. Une autre personne que le développeur doit approuver la PR.
 - Catalogue central de toggle switches
 - Types de switches :
@@ -35,7 +35,7 @@ Développer un site complet qui sert à la fois de **référence documentaire** 
 **Règle pour les sections incomplètes :**
 Pour toute section où l’information est manquante ou incomplète, insérer le placeholder suivant :
 
-> **Note :** Cette section doit être complétée avec les informations manquantes au moment de la création du site (contenu détaillé, captures d’écran, exemples concrets Desjardins, etc.).
+> **Note :** Cette section doit être complétée avec les informations manquantes au moment de la création du site (contenu détaillé, captures d’écran, exemples concrets ExampleCo, etc.).
 
 **Contexte technique attendu :**
 - Site moderne, responsive, en HTML5 / CSS / JavaScript (framework léger autorisé si justifié, ex: pas de framework lourd)
@@ -44,7 +44,7 @@ Pour toute section où l’information est manquante ou incomplète, insérer le
 
 **Contraintes :**
 - Tout le contenu en français
-- Ton professionnel, prudent, orienté gouvernance, conformité et risque (culture Desjardins)
+- Ton professionnel, prudent, orienté gouvernance, conformité et risque (culture ExampleCo)
 - Architecture propre, modulaire et facile à maintenir
 - Minimiser les dépendances externes
 
@@ -52,7 +52,7 @@ Pour toute section où l’information est manquante ou incomplète, insérer le
 - Le site est fonctionnel localement (`index.html` ou `npm run dev`)
 - Les deux parcours de formation sont implémentés et interactifs
 - Toutes les sections sont présentes avec placeholders pour les parties manquantes
-- Spécificités Desjardins bien intégrées
+- Spécificités ExampleCo bien intégrées
 - Site cohérent visuellement et prêt à être déployé
 
 **Fichiers de référence :** @BACKLOG.md

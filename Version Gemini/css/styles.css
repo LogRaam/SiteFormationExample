@@ -1,6 +1,6 @@
 :root {
-    --desjardins-green: #008542;
-    --desjardins-blue: #002d72;
+    --ExampleCo-green: #008542;
+    --ExampleCo-blue: #002d72;
     --light-gray: #f4f4f4;
     --dark-gray: #333;
     --white: #ffffff;
@@ -21,13 +21,13 @@ body {
 }
 
 header {
-    background-color: var(--desjardins-green);
+    background-color: var(--ExampleCo-green);
     color: var(--white);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 4px solid var(--desjardins-blue);
+    border-bottom: 4px solid var(--ExampleCo-blue);
 }
 
 header h1 {
@@ -68,7 +68,7 @@ main {
 }
 
 .hero h2 {
-    color: var(--desjardins-blue);
+    color: var(--ExampleCo-blue);
     margin-bottom: 1rem;
 }
 
@@ -94,7 +94,7 @@ main {
 }
 
 .card h3 {
-    color: var(--desjardins-green);
+    color: var(--ExampleCo-green);
     margin-bottom: 1rem;
 }
 
@@ -105,7 +105,7 @@ main {
 
 .btn {
     display: inline-block;
-    background-color: var(--desjardins-green);
+    background-color: var(--ExampleCo-green);
     color: var(--white);
     padding: 0.75rem 1.5rem;
     text-decoration: none;
@@ -121,7 +121,7 @@ main {
 }
 
 .btn-blue {
-    background-color: var(--desjardins-blue);
+    background-color: var(--ExampleCo-blue);
 }
 
 .btn-blue:hover {
@@ -131,7 +131,7 @@ main {
 footer {
     text-align: center;
     padding: 2rem;
-    background-color: var(--desjardins-blue);
+    background-color: var(--ExampleCo-blue);
     color: var(--white);
     margin-top: 4rem;
 }
