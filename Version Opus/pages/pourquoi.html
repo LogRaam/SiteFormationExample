@@ -44,17 +44,18 @@
       </div>
 
       <h2>Les bonnes raisons d'utiliser un toggle</h2>
+      <p class="muted">Chaque carte mène à un approfondissement (exemple, à faire / à éviter, liens utiles).</p>
       <div class="grid grid-3">
-        <div class="card"><div class="card-icone">📉</div><h3>Réduire le risque</h3><p class="muted">Déploiement progressif + retour arrière instantané sans MEP d'urgence.</p></div>
-        <div class="card"><div class="card-icone">🧭</div><h3>Donner le contrôle aux Affaires</h3><p class="muted">Le moment d'activation devient une décision métier, pas un événement technique.</p></div>
-        <div class="card"><div class="card-icone">🔬</div><h3>Apprendre</h3><p class="muted">Expérimenter, comparer, mesurer sur une fraction des utilisateurs.</p></div>
-        <div class="card"><div class="card-icone">🔀</div><h3>Découpler les équipes</h3><p class="muted">Intégrer du code en continu (trunk-based) sans bloquer la livraison.</p></div>
-        <div class="card"><div class="card-icone">🚦</div><h3>Coordonner une bascule</h3><p class="muted">Activer une fonctionnalité au bon moment (campagne, date réglementaire).</p></div>
-        <div class="card"><div class="card-icone">🛑</div><h3>Pouvoir tout couper</h3><p class="muted">Kill switch pour une intégration sensible ou coûteuse.</p></div>
+        <a class="card card-lien" href="#reduire-le-risque"><div class="card-icone">📉</div><h3>Réduire le risque</h3><p class="muted">Déploiement progressif + retour arrière instantané sans MEP d'urgence.</p><p class="mb-0"><strong>Détails →</strong></p></a>
+        <a class="card card-lien" href="#controle-affaires"><div class="card-icone">🧭</div><h3>Donner le contrôle aux Affaires</h3><p class="muted">Le moment d'activation devient une décision métier, pas un événement technique.</p><p class="mb-0"><strong>Détails →</strong></p></a>
+        <a class="card card-lien" href="#apprendre-experimenter"><div class="card-icone">🔬</div><h3>Apprendre</h3><p class="muted">Expérimenter, comparer, mesurer sur une fraction des utilisateurs.</p><p class="mb-0"><strong>Détails →</strong></p></a>
+        <a class="card card-lien" href="#decoupler-les-equipes"><div class="card-icone">🔀</div><h3>Découpler les équipes</h3><p class="muted">Intégrer du code en continu (trunk-based) sans bloquer la livraison.</p><p class="mb-0"><strong>Détails →</strong></p></a>
+        <a class="card card-lien" href="#coordonner-bascule"><div class="card-icone">🚦</div><h3>Coordonner une bascule</h3><p class="muted">Activer une fonctionnalité au bon moment (campagne, date réglementaire).</p><p class="mb-0"><strong>Détails →</strong></p></a>
+        <a class="card card-lien" href="#pouvoir-tout-couper"><div class="card-icone">🛑</div><h3>Pouvoir tout couper</h3><p class="muted">Kill switch pour une intégration sensible ou coûteuse.</p><p class="mb-0"><strong>Détails →</strong></p></a>
       </div>
 
-      <h2>Trois bénéfices clés, en détail</h2>
-      <p class="lede">Approfondissement des trois bénéfices mis en avant sur la page d'accueil, avec exemples et garde-fous.</p>
+      <h2>Les bénéfices, en détail</h2>
+      <p class="lede">Approfondissement des bénéfices et bonnes raisons mis en avant ci-dessus et sur la page d'accueil, avec exemples et garde-fous.</p>
 
       <section class="card" id="deployer-vs-exposer" style="scroll-margin-top:84px;margin-bottom:1.25rem">
         <div class="card-icone">⏱️</div>
@@ -90,6 +91,66 @@
           <div><strong>✘ À éviter</strong><ul class="croix"><li>Confondre ciblage de toggle et contrôle d'accès sécurisé.</li><li>Multiplier les règles de ciblage au point de ne plus s'y retrouver.</li></ul></div>
         </div>
         <p class="mb-0">📎 Voir aussi&nbsp;: <a href="exampleco.html#types">Types de switches</a> · <a href="glossaire.html">Glossaire (segment, bucketing)</a></p>
+      </section>
+
+      <section class="card" id="controle-affaires" style="scroll-margin-top:84px;margin-bottom:1.25rem">
+        <div class="card-icone">🧭</div>
+        <h3 class="mt-0">Donner le contrôle aux Affaires</h3>
+        <p>Le moment d'activation devient une <strong>décision métier</strong>, prise par le Product Owner selon la valeur d'affaires et le risque — et non un événement technique déclenché par un déploiement. Le métier choisit <em>quand</em> et <em>pour qui</em>, l'équipe technique a déjà livré le code.</p>
+        <p><strong>Exemple ExampleCo :</strong> une nouvelle offre est prête en pré-production depuis deux semaines. Le PO l'active le jour du lancement marketing, en pleine cohérence avec la campagne — sans solliciter d'équipe technique ni de fenêtre de mise en production.</p>
+        <div class="grid grid-2">
+          <div><strong>✔ À faire</strong><ul class="coches"><li>Désigner un propriétaire de la décision d'activation.</li><li>Définir à l'avance les critères de succès et de retour arrière.</li></ul></div>
+          <div><strong>✘ À éviter</strong><ul class="croix"><li>Laisser l'activation se faire « par défaut » sans décision explicite.</li><li>Oublier d'anticiper le délai d'approbation SOC2 dans le planning.</li></ul></div>
+        </div>
+        <p class="mb-0">📎 Voir aussi&nbsp;: <a href="parcours-metier.html">Parcours Métier / PO</a> · <a href="exampleco.html#soc2">Processus SOC2</a></p>
+      </section>
+
+      <section class="card" id="apprendre-experimenter" style="scroll-margin-top:84px;margin-bottom:1.25rem">
+        <div class="card-icone">🔬</div>
+        <h3 class="mt-0">Apprendre (expérimenter et mesurer)</h3>
+        <p>Un toggle permet de <strong>comparer plusieurs variantes</strong> (A/B, multivarié) sur une fraction des utilisateurs et de mesurer leur impact sur des indicateurs d'affaires avant de généraliser la meilleure option.</p>
+        <p><strong>Exemple ExampleCo :</strong> deux versions d'un formulaire d'adhésion sont exposées chacune à 50 % d'un segment. On mesure le taux de complétion pendant deux semaines, puis on généralise la variante gagnante et on retire le flag.</p>
+        <div class="grid grid-2">
+          <div><strong>✔ À faire</strong><ul class="coches"><li>Définir l'indicateur de succès <em>avant</em> de lancer l'expérience.</li><li>Affecter une variante stable par utilisateur (bucketing cohérent).</li></ul></div>
+          <div><strong>✘ À éviter</strong><ul class="croix"><li>Conclure trop tôt, sans données suffisantes.</li><li>Laisser le flag d'expérimentation traîner une fois la décision prise.</li></ul></div>
+        </div>
+        <p class="mb-0">📎 Voir aussi&nbsp;: <a href="concepts.html">Concepts (toggle d'expérimentation)</a> · <a href="glossaire.html">Glossaire (variation)</a></p>
+      </section>
+
+      <section class="card" id="decoupler-les-equipes" style="scroll-margin-top:84px;margin-bottom:1.25rem">
+        <div class="card-icone">🔀</div>
+        <h3 class="mt-0">Découpler les équipes</h3>
+        <p>Le toggle autorise l'<strong>intégration continue</strong> (trunk-based development)&nbsp;: on fusionne fréquemment du code, même incomplet, derrière un flag « off ». Les équipes ne se bloquent pas mutuellement et évitent les longues branches divergentes.</p>
+        <p><strong>Exemple ExampleCo :</strong> une refonte étalée sur plusieurs sprints est livrée en petits incréments, tous derrière le même flag. Le code part en production au fil de l'eau, sans jamais être exposé, jusqu'à ce que l'ensemble soit prêt.</p>
+        <div class="grid grid-2">
+          <div><strong>✔ À faire</strong><ul class="coches"><li>Fusionner souvent, derrière un flag, avec une valeur par défaut sûre.</li><li>Tester les deux états à chaque incrément.</li></ul></div>
+          <div><strong>✘ À éviter</strong><ul class="croix"><li>Accumuler des semaines de code sur une branche isolée.</li><li>Multiplier les flags imbriqués jusqu'à l'ingérable.</li></ul></div>
+        </div>
+        <p class="mb-0">📎 Voir aussi&nbsp;: <a href="toggle-ready.html">Toggle Ready</a> · <a href="glossaire.html">Glossaire (trunk-based)</a></p>
+      </section>
+
+      <section class="card" id="coordonner-bascule" style="scroll-margin-top:84px;margin-bottom:1.25rem">
+        <div class="card-icone">🚦</div>
+        <h3 class="mt-0">Coordonner une bascule</h3>
+        <p>Quand une fonctionnalité doit s'activer à un <strong>moment précis</strong> (date réglementaire, début de campagne, fenêtre coordonnée entre systèmes), le toggle permet de déclencher la bascule au bon instant — indépendamment du calendrier de déploiement.</p>
+        <p><strong>Exemple ExampleCo :</strong> un changement de tarification doit entrer en vigueur à une date réglementaire. Le code est déployé en avance&nbsp;; l'activation est planifiée pile à la date prévue, sans intervention technique de dernière minute.</p>
+        <div class="grid grid-2">
+          <div><strong>✔ À faire</strong><ul class="coches"><li>Déployer le code en avance, activer le jour J.</li><li>Vérifier le bon état avant et après la bascule.</li></ul></div>
+          <div><strong>✘ À éviter</strong><ul class="croix"><li>Synchroniser une mise en production avec l'heure exacte de la bascule.</li><li>Négliger le délai d'approbation SOC2 avant l'échéance.</li></ul></div>
+        </div>
+        <p class="mb-0">📎 Voir aussi&nbsp;: <a href="cycle-de-vie.html">Cycle de vie</a> · <a href="sandbox.html">Bac à sable</a></p>
+      </section>
+
+      <section class="card" id="pouvoir-tout-couper" style="scroll-margin-top:84px;margin-bottom:1.25rem">
+        <div class="card-icone">🛑</div>
+        <h3 class="mt-0">Pouvoir tout couper (kill switch)</h3>
+        <p>Pour une intégration <strong>sensible ou coûteuse</strong>, un toggle opérationnel sert d'interrupteur d'urgence&nbsp;: on coupe la fonctionnalité instantanément, sans redéploiement, pour protéger le service ou maîtriser un incident.</p>
+        <p><strong>Exemple ExampleCo :</strong> un service partenaire externe se dégrade et ralentit l'application. L'équipe d'exploitation actionne le kill switch pour désactiver l'appel, le temps que le partenaire rétablisse le service.</p>
+        <div class="grid grid-2">
+          <div><strong>✔ À faire</strong><ul class="coches"><li>Prévoir le kill switch dès la conception d'une intégration à risque.</li><li>Tester que la coupure laisse l'application dans un état stable.</li></ul></div>
+          <div><strong>✘ À éviter</strong><ul class="croix"><li>Découvrir l'absence de kill switch pendant l'incident.</li><li>Confondre kill switch (ops, souvent permanent) et toggle de release.</li></ul></div>
+        </div>
+        <p class="mb-0">🧪 À essayer&nbsp;: <a href="sandbox.html">le bac à sable (kill switch)</a> · 📎 <a href="#reduire-le-risque">Réduire le risque</a></p>
       </section>
 
       <h2>Les mauvaises raisons (signaux d'alerte)</h2>
